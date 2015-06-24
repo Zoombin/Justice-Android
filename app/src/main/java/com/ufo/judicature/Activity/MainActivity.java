@@ -1,6 +1,7 @@
 package com.ufo.judicature.Activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,38 +10,65 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ufo.judicature.Base.BaseActivity;
+import com.ufo.judicature.Fragment.AgencyFragment;
+import com.ufo.judicature.Fragment.ExamFragment;
+import com.ufo.judicature.Fragment.LawyerFragment;
+import com.ufo.judicature.Fragment.NotarizationFragment;
+import com.ufo.judicature.Fragment.PropagandaFragment;
 import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.R;
 import com.ufo.judicature.Widget.Toast;
 
 /**
- * 主页
+ * main page
  */
 public class MainActivity extends BaseActivity {
 
-    // /** 再按一次退出程序 */
     private long exitTime = 0;
     private int currentTabIndex;
     private Fragment[] fragments;
     private int index;
     private Button[] mTabs;
+    private Resources resources;
+    private PropagandaFragment propagandafragment;
+    private ExamFragment examfragment;
+    private LawyerFragment lawyerfragment;
+    private NotarizationFragment notarizationfragment;
+    private AgencyFragment agencyfragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        resources = getResources();
+
         initView();
 
-
+        propagandafragment = new PropagandaFragment();
+        examfragment = new ExamFragment();
+        lawyerfragment = new LawyerFragment();
+        notarizationfragment = new NotarizationFragment();
+        agencyfragment = new AgencyFragment();
+        Fragment[] arrayOfFragment = new Fragment[5];
+        arrayOfFragment[0] = propagandafragment;
+        arrayOfFragment[1] = examfragment;
+        arrayOfFragment[2] = lawyerfragment;
+        arrayOfFragment[3] = notarizationfragment;
+        arrayOfFragment[4] = agencyfragment;
+        fragments = arrayOfFragment;
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, propagandafragment).show(propagandafragment)
+                .commit();
     }
 
     private void initView() {
         this.mTabs = new Button[5];
-        this.mTabs[0] = ((Button) findViewById(R.id.button_home));
-        this.mTabs[1] = ((Button) findViewById(R.id.button_sort));
-        this.mTabs[2] = ((Button) findViewById(R.id.button_store));
-        this.mTabs[3] = ((Button) findViewById(R.id.button_shopcart));
-        this.mTabs[4] = ((Button) findViewById(R.id.button_mycenter));
+        this.mTabs[0] = ((Button) findViewById(R.id.button_propaganda));
+        this.mTabs[1] = ((Button) findViewById(R.id.button_exam));
+        this.mTabs[2] = ((Button) findViewById(R.id.button_lawyer));
+        this.mTabs[3] = ((Button) findViewById(R.id.button_notarization));
+        this.mTabs[4] = ((Button) findViewById(R.id.button_agency));
+//        this.mTabs[5] = ((Button) findViewById(R.id.button_aid));
         this.mTabs[0].setSelected(true);
     }
 
@@ -50,26 +78,30 @@ public class MainActivity extends BaseActivity {
 
     public void tabSelect(int viewid) {
         switch (viewid) {
-            case R.id.button_home:
+            case R.id.button_propaganda:
                 index = 0;
                 selectTab();
                 break;
-            case R.id.button_sort:
+            case R.id.button_exam:
                 index = 1;
                 selectTab();
                 break;
-            case R.id.button_store:
+            case R.id.button_lawyer:
                 index = 2;
                 selectTab();
                 break;
-            case R.id.button_shopcart:
+            case R.id.button_notarization:
                 index = 3;
                 selectTab();
                 break;
-            case R.id.button_mycenter:
+            case R.id.button_agency:
                 index = 4;
                 selectTab();
                 break;
+//            case R.id.button_aid:
+//                index = 5;
+//                selectTab();
+//                break;
             default:
                 break;
         }
@@ -104,10 +136,9 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.show(this, "再按一次退出程序");
+                Toast.show(this, resources.getString(R.string.exit_toast));
                 exitTime = System.currentTimeMillis();
             } else {
-                // finish();
                 activityManager.popAllActivity();
                 JudiApplication.getInstance().onTerminate();
                 System.exit(0);
@@ -128,5 +159,4 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
 }

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
-
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.DecelerateInterpolator;
@@ -19,7 +17,7 @@ import com.ufo.judicature.Utils.Config;
 //import com.ufo.judicature.R;
 
 /**
- * logo页
+ * logo page
  * 
  */
 public class LogoActivity extends BaseActivity {
@@ -162,7 +160,7 @@ public class LogoActivity extends BaseActivity {
 	private void startLogoAnimation() {
 
 		TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
-				Animation.RELATIVE_TO_SELF, 0.1f, Animation.RELATIVE_TO_SELF, 0.0f);
+				Animation.RELATIVE_TO_SELF, 0.2f, Animation.RELATIVE_TO_SELF, 0.0f);
 		animation.setDuration(800); // 设置动画持续时间
 		animation.setFillAfter(true);
 		animation.setInterpolator(new DecelerateInterpolator());

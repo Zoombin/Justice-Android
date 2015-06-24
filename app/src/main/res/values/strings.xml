@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">常熟司法</string>
-
+    <string name="logo">常熟司法\n便民助手</string>
+    <string name="text_tab_propaganda">宣传普法</string>
+    <string name="text_tab_exam">在线考试</string>
+    <string name="text_tab_lawyer">律师在线</string>
+    <string name="text_tab_notarization">公证服务</string>
+    <string name="text_tab_agency">服务机构</string>
+    <string name="ic_aid_selector">法律援助</string>
+    <string name="exit_toast">再按一次返回键退出！</string>
 
 </resources>

@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity {
         mTabs[6] = ((Button) findViewById(R.id.button_continue));
         mTabs[0].setSelected(true);
 
-        int buttonWidth = Utils.getScreenWidth(this) / 4;
+        int buttonWidth = (int)(Utils.getScreenWidth(this) / 4.5);
         for (Button button: mTabs) {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) button.getLayoutParams();
             params.width = buttonWidth;

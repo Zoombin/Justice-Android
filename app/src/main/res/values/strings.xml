@@ -6,7 +6,8 @@
     <string name="text_tab_lawyer">律师在线</string>
     <string name="text_tab_notarization">公证服务</string>
     <string name="text_tab_agency">服务机构</string>
-    <string name="ic_aid_selector">法律援助</string>
+    <string name="text_tab_aid">法律援助</string>
+    <string name="text_tab_continue">待续&#8230;</string>
     <string name="exit_toast">再按一次返回键退出！</string>
 
 </resources>

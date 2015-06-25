@@ -1,16 +1,5 @@
 package com.ufo.judicature.Utils;
 
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-
-import org.apache.http.conn.util.InetAddressUtils;
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -19,6 +8,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
+import android.view.Display;
+import android.view.WindowManager;
+
+import org.apache.http.conn.util.InetAddressUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
 
 /**
  * 工具类
@@ -214,5 +216,21 @@ public class Utils {
 		}
 		// Log.d(TAG, "sdcard is not exist or can not read/write");
 		return false;
+	}
+
+	//获取屏幕的宽度
+	public static int getScreenWidth(Context context) {
+		WindowManager manager = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display display = manager.getDefaultDisplay();
+		return display.getWidth();
+	}
+
+	//获取屏幕的高度
+	public static int getScreenHeight(Context context) {
+		WindowManager manager = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display display = manager.getDefaultDisplay();
+		return display.getHeight();
 	}
 }

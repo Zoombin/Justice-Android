@@ -5,128 +5,145 @@
     android:layout_height="fill_parent"
     android:background="@color/app_bg_color">
 
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/main_bottom"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="3dip"
-        android:paddingTop="8dip">
+        android:scrollbars="none" >
 
-        <Button
-            android:id="@+id/button_propaganda"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@null"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_propaganda_selector"
-            android:onClick="onTabClicked"
-            android:singleLine="true"
-            android:tag="propaganda"
-            android:text="@string/text_tab_propaganda"
-            android:textColor="@color/text_tab_color"
-            android:textSize="12sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="3dip"
+            android:paddingTop="8dip">
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/line_color" />
+            <Button
+                android:id="@+id/button_propaganda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_propaganda_selector"
+                android:onClick="onTabClicked"
+                android:singleLine="true"
+                android:tag="propaganda"
+                android:text="@string/text_tab_propaganda"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/button_exam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@null"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_exam_selector"
-            android:onClick="onTabClicked"
-            android:singleLine="true"
-            android:tag="exam"
-            android:text="@string/text_tab_exam"
-            android:textColor="@color/text_tab_color"
-            android:textSize="12sp" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/line_color" />
+            <Button
+                android:id="@+id/button_exam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_exam_selector"
+                android:onClick="onTabClicked"
+                android:singleLine="true"
+                android:tag="exam"
+                android:text="@string/text_tab_exam"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/button_lawyer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@null"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_lawyer_selector"
-            android:onClick="onTabClicked"
-            android:singleLine="true"
-            android:tag="lawyer"
-            android:text="@string/text_tab_lawyer"
-            android:textColor="@color/text_tab_color"
-            android:textSize="12sp" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/line_color" />
+            <Button
+                android:id="@+id/button_lawyer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_lawyer_selector"
+                android:onClick="onTabClicked"
+                android:singleLine="true"
+                android:tag="lawyer"
+                android:text="@string/text_tab_lawyer"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/button_notarization"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@null"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_notarization_selector"
-            android:onClick="onTabClicked"
-            android:singleLine="true"
-            android:text="@string/text_tab_notarization"
-            android:textColor="@color/text_tab_color"
-            android:textSize="12sp" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/line_color" />
+            <Button
+                android:id="@+id/button_notarization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_notarization_selector"
+                android:onClick="onTabClicked"
+                android:singleLine="true"
+                android:text="@string/text_tab_notarization"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/button_agency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@null"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_agency_selector"
-            android:onClick="onTabClicked"
-            android:singleLine="true"
-            android:text="@string/text_tab_agency"
-            android:textColor="@color/text_tab_color"
-            android:textSize="12sp" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color" />
 
-        <!--<View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/line_color" />
+            <Button
+                android:id="@+id/button_agency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_agency_selector"
+                android:onClick="onTabClicked"
+                android:singleLine="true"
+                android:text="@string/text_tab_agency"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/button_aid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@null"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_aid_selector"
-            android:onClick="onTabClicked"
-            android:singleLine="true"
-            android:text="@string/text_tab_aid"
-            android:textColor="@color/text_tab_color"
-            android:textSize="12sp" />-->
-    </LinearLayout>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color" />
+
+            <Button
+                android:id="@+id/button_aid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_aid_selector"
+                android:onClick="onTabClicked"
+                android:singleLine="true"
+                android:text="@string/text_tab_aid"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color" />
+
+            <Button
+                android:id="@+id/button_continue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_aid_selector"
+                android:singleLine="true"
+                android:text="@string/text_tab_continue"
+                android:textColor="@color/text_tab_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <View
         android:id="@+id/view_line"

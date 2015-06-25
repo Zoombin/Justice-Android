@@ -8,15 +8,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.ufo.judicature.Base.BaseActivity;
 import com.ufo.judicature.Fragment.AgencyFragment;
+import com.ufo.judicature.Fragment.AidFragment;
 import com.ufo.judicature.Fragment.ExamFragment;
 import com.ufo.judicature.Fragment.LawyerFragment;
 import com.ufo.judicature.Fragment.NotarizationFragment;
 import com.ufo.judicature.Fragment.PropagandaFragment;
 import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.R;
+import com.ufo.judicature.Utils.Utils;
 import com.ufo.judicature.Widget.Toast;
 
 /**
@@ -35,6 +38,7 @@ public class MainActivity extends BaseActivity {
     private LawyerFragment lawyerfragment;
     private NotarizationFragment notarizationfragment;
     private AgencyFragment agencyfragment;
+    private AidFragment aidfragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +53,14 @@ public class MainActivity extends BaseActivity {
         lawyerfragment = new LawyerFragment();
         notarizationfragment = new NotarizationFragment();
         agencyfragment = new AgencyFragment();
-        Fragment[] arrayOfFragment = new Fragment[5];
+        aidfragment = new AidFragment();
+        Fragment[] arrayOfFragment = new Fragment[6];
         arrayOfFragment[0] = propagandafragment;
         arrayOfFragment[1] = examfragment;
         arrayOfFragment[2] = lawyerfragment;
         arrayOfFragment[3] = notarizationfragment;
         arrayOfFragment[4] = agencyfragment;
+        arrayOfFragment[5] = aidfragment;
         fragments = arrayOfFragment;
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, propagandafragment).show(propagandafragment)
@@ -62,14 +68,22 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initView() {
-        this.mTabs = new Button[5];
-        this.mTabs[0] = ((Button) findViewById(R.id.button_propaganda));
-        this.mTabs[1] = ((Button) findViewById(R.id.button_exam));
-        this.mTabs[2] = ((Button) findViewById(R.id.button_lawyer));
-        this.mTabs[3] = ((Button) findViewById(R.id.button_notarization));
-        this.mTabs[4] = ((Button) findViewById(R.id.button_agency));
-//        this.mTabs[5] = ((Button) findViewById(R.id.button_aid));
-        this.mTabs[0].setSelected(true);
+        mTabs = new Button[7];
+        mTabs[0] = ((Button) findViewById(R.id.button_propaganda));
+        mTabs[1] = ((Button) findViewById(R.id.button_exam));
+        mTabs[2] = ((Button) findViewById(R.id.button_lawyer));
+        mTabs[3] = ((Button) findViewById(R.id.button_notarization));
+        mTabs[4] = ((Button) findViewById(R.id.button_agency));
+        mTabs[5] = ((Button) findViewById(R.id.button_aid));
+        mTabs[6] = ((Button) findViewById(R.id.button_continue));
+        mTabs[0].setSelected(true);
+
+        int buttonWidth = Utils.getScreenWidth(this) / 4;
+        for (Button button: mTabs) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) button.getLayoutParams();
+            params.width = buttonWidth;
+            button.setLayoutParams(params);
+        }
     }
 
     public void onTabClicked(View v) {
@@ -98,10 +112,10 @@ public class MainActivity extends BaseActivity {
                 index = 4;
                 selectTab();
                 break;
-//            case R.id.button_aid:
-//                index = 5;
-//                selectTab();
-//                break;
+            case R.id.button_aid:
+                index = 5;
+                selectTab();
+                break;
             default:
                 break;
         }

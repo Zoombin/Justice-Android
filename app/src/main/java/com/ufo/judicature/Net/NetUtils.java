@@ -1,10 +1,5 @@
 package com.ufo.judicature.Net;
 
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -25,13 +20,18 @@ import com.ufo.judicature.R;
 import com.ufo.judicature.Utils.Utils;
 import com.ufo.judicature.Widget.CProgressDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
+
 public class NetUtils {
 	public interface NetCallBack<T> {
 		public void success(T rspData);
 		public void failed(String msg);
 	}
 
-	public static final String BASE_URL = "http://appdev.imooly.com:8088/moolyapp/api/v1.0/";
+	public static final String BASE_URL = "http://112.124.98.9/dushuhu-web/index.php";
 
 	private static RequestQueue mQueue = Volley.newRequestQueue(JudiApplication.getContext());
 
@@ -64,8 +64,8 @@ public class NetUtils {
 			public void onResponse(JSONObject jsonObject) {
 				progressDialog.dismiss();
 				//Log.i("NetUtils", "get rsp : " + jsonObject.toString());
-				int errorCode = getErrorCode(jsonObject.toString());
-				if (0 != errorCode) {
+				boolean errorCode = getErrorCode(jsonObject.toString());
+				if (errorCode) {
 					if (callBack != null)
 						callBack.failed(getErrorMsg(jsonObject.toString()));
 					return;
@@ -75,7 +75,6 @@ public class NetUtils {
 					Gson gson = new Gson();
 					rsp = (ServiceResult) gson.fromJson(jsonObject.toString(), rspCls);
 				} catch (Exception e) {
-					// TODO: handle exception
 					Log.e("NetUtils", "get RspMsgError !");
 					e.printStackTrace();
 				}
@@ -116,7 +115,7 @@ public class NetUtils {
 					progressDialog.show();
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 		String url = BASE_URL + method;
@@ -126,8 +125,8 @@ public class NetUtils {
 			public void onResponse(String jsonObject) {
 				progressDialog.dismiss();
 				//Log.i("NetUtils", "post rsp : " + new String(jsonObject.getBytes()));
-				int errorCode = getErrorCode(jsonObject);
-				if (0 != errorCode) {
+				boolean errorCode = getErrorCode(jsonObject);
+				if (errorCode) {
 					if (callBack != null)
 						callBack.failed(getErrorMsg(jsonObject));
 					return;
@@ -137,7 +136,6 @@ public class NetUtils {
 					Gson gson = new Gson();
 					rsp = (ServiceResult) gson.fromJson(jsonObject.toString(), rspCls);
 				} catch (Exception e) {
-					// TODO: handle exception
 					Log.e("NetUtils", "post RspMsgError !");
 					e.printStackTrace();
 				}
@@ -165,15 +163,14 @@ public class NetUtils {
 		mQueue.start();
 	}
 
-	public static int getErrorCode(String str) {
+	public static boolean getErrorCode(String str) {
 		try {
 			JSONObject object = new JSONObject(str);
-			return object.optInt("error");
+			return object.optBoolean("error");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return true;
 	}
 
 	public static String getErrorMsg(String str) {
@@ -181,13 +178,8 @@ public class NetUtils {
 			JSONObject object = new JSONObject(str);
 			return object.optString("msg");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
-	}
-
-	public static String getBaseUrl() {
-		return BASE_URL;
 	}
 }

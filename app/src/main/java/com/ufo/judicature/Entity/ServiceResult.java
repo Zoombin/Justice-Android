@@ -12,16 +12,16 @@ import com.google.gson.annotations.SerializedName;
 
 public abstract class ServiceResult {
 	@SerializedName("error")
-	public int error;
+	public boolean error;
 
 	@SerializedName("msg")
 	public String msg;
 
-	public int getError() {
+	public boolean getError() {
 		return error;
 	}
 
-	public void setError(int error) {
+	public void setError(boolean error) {
 		this.error = error;
 	}
 

@@ -12,7 +12,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.ufo.judicature.Base.BaseFragment;
+import com.ufo.judicature.Entity.AgencyEntity;
+import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.Net.Api;
+import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
+import com.ufo.judicature.Widget.Toast;
 
 import java.util.ArrayList;
 
@@ -98,7 +103,18 @@ public class PropagandaFragment extends BaseFragment {
     }
 
     private void initData() {
+        Api.getService(mActivity, new NetUtils.NetCallBack<ServiceResult>() {
+            @Override
+            public void success(ServiceResult rspData) {
+                AgencyEntity a = (AgencyEntity) rspData;
+                a.getData();
+            }
 
+            @Override
+            public void failed(String msg) {
+                Toast.show(mActivity, msg);
+            }
+        }, AgencyEntity.class);
     }
 
     public class PropagandaViewPagerAdapter extends FragmentPagerAdapter {

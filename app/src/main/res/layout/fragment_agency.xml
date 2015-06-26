@@ -3,6 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-
+    <ExpandableListView
+        android:id="@+id/lv_agency"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="false"
+        android:divider="@color/edit_text_hint_color"
+        android:dividerHeight="1.0dip">
+    </ExpandableListView>
 
 </RelativeLayout>

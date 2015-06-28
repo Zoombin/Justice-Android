@@ -1,3 +1,8 @@
 key store password:ufo123123
 key alias:ufo
 key password:ufo123123
+SHA1:95:6F:FB:4A:B4:9E:AD:00:AE:17:D6:FB:A6:B7:22:F9:A2:52:03:C1
+
+
+SHA1:27:6B:E5:8D:9D:E0:67:01:C4:1C:5F:1E:05:E3:4A:99:8B:FA:3E:FC
+     27:6B:E5:8D:9D:E0:67:01:C4:1C:5F:1E:05:E3:4A:99:8B:FA:3E:FC;com.ufo.judicature

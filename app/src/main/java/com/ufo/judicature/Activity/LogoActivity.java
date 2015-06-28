@@ -26,8 +26,8 @@ public class LogoActivity extends BaseActivity {
 	private ImageView image_logo;
 
 	@Override
-	public void onCreate(Bundle paramBundle) {
-		super.onCreate(paramBundle);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_logo);
 
 		Config.setScreenSize(this);

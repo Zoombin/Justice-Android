@@ -19,6 +19,7 @@ import com.ufo.judicature.Fragment.NotarizationFragment;
 import com.ufo.judicature.Fragment.PropagandaFragment;
 import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.R;
+import com.ufo.judicature.Utils.Config;
 import com.ufo.judicature.Utils.Utils;
 import com.ufo.judicature.Widget.Toast;
 
@@ -45,6 +46,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         resources = getResources();
+
+        Config.setScreenSize(this);
 
         initView();
 

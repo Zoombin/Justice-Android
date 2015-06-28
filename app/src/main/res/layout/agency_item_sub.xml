@@ -8,10 +8,12 @@
         android:id="@+id/tv_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dip"
         android:layout_gravity="center_vertical"
+        android:layout_marginBottom="15dip"
+        android:layout_marginLeft="25dip"
+        android:layout_marginTop="15dip"
         android:singleLine="true"
         android:textColor="@color/app_text_gray"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
 </LinearLayout>

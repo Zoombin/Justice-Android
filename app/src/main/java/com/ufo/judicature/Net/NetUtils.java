@@ -48,7 +48,7 @@ public class NetUtils {
 
 		if (msg != null) {
 			progressDialog.setMessage(msg);
-			progressDialog.setCancelable(true);
+			progressDialog.setCancelable(false);
 			try {
 				if (!progressDialog.isShowing()) {
 					progressDialog.show();

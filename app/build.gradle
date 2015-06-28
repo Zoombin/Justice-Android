@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'ufo'
+            keyPassword 'ufo123123'
+            storeFile file('C:/Users/daiye/AndroidStudioProjects/Justice-Android/app/src/main/key/key.jks')
+            storePassword 'ufo123123'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
@@ -26,4 +34,5 @@ dependencies {
     compile files('libs/gson-2.2.4.jar')
     compile files('libs/universal-image-loader-1.9.4.jar')
     compile files('libs/volley.jar')
+    compile files('libs/baidumapapi_v3_5_0.jar')
 }

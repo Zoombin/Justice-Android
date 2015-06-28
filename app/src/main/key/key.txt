@@ -1,0 +1,3 @@
+key store password:ufo123123
+key alias:ufo
+key password:ufo123123

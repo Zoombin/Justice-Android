@@ -2,26 +2,31 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
+        relese {
             keyAlias 'ufo'
             keyPassword 'ufo123123'
-            storeFile file('C:/Users/daiye/AndroidStudioProjects/Justice-Android/app/src/main/key/key.jks')
+            storeFile file('D:/Users/Administrator/AndroidStudioProjects/Justice-Android/key.jks')
             storePassword 'ufo123123'
         }
     }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        applicationId "com.ufo.judiapplication"
+        applicationId "com.ufo.judicature"
         minSdkVersion 10
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.relese
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relese
+        }
+        debug {
+            signingConfig signingConfigs.relese
         }
     }
     productFlavors {

@@ -2,7 +2,6 @@ package com.ufo.judicature.Activity;
 
 import android.os.Bundle;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 import com.ufo.judicature.Base.BaseActivity;
 import com.ufo.judicature.R;
@@ -19,6 +18,7 @@ public class MapActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         setContentView(R.layout.activity_map);
+
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
     }

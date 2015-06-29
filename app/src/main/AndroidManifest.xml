@@ -67,6 +67,18 @@
         <activity
             android:name="com.ufo.judicature.Activity.NewDetailActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ufo.judicature.Activity.DoNotarizationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ufo.judicature.Activity.MyNotarizationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ufo.judicature.Activity.NotarizationInfoActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

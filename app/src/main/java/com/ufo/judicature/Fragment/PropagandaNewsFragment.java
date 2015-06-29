@@ -1,6 +1,7 @@
 package com.ufo.judicature.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -12,11 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ufo.judicature.Activity.NewDetailActivity;
 import com.ufo.judicature.Base.BaseFragment;
 import com.ufo.judicature.Entity.NewsEntity;
+import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.Net.Api;
+import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
 import com.ufo.judicature.Widget.OnRefreshListener;
 import com.ufo.judicature.Widget.RefreshListView;
+import com.ufo.judicature.Widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,6 +38,7 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
     private ViewPager guidePages;
     private LinearLayout viewGroup;
     private NewsListViewAdapter adapter;
+    private int page = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,24 +58,47 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
 
         adapter = new NewsListViewAdapter(mActivity);
         lv_news.addHeaderView(header);
-        lv_news.setAdapter(adapter);//
+        lv_news.setAdapter(adapter);
         lv_news.setOnRefreshListener(this);
 
         guidePages.addOnPageChangeListener(new NavigationPageChangeListener());
     }
 
     private void initData() {
+        getData();
+    }
 
+    private void getData() {
+        Api.getNews(mActivity, page, new NetUtils.NetCallBack<ServiceResult>() {
+            @Override
+            public void success(ServiceResult rspData) {
+                lv_news.hideHeaderView();
+                lv_news.hideFooterView();
+                NewsEntity entity = (NewsEntity) rspData;
+                ArrayList<NewsEntity.NewEntity> news = entity.getData();
+                adapter.addNewsList(news);
+                page++;
+            }
+
+            @Override
+            public void failed(String msg) {
+                lv_news.hideHeaderView();
+                lv_news.hideFooterView();
+                Toast.show(mActivity, msg);
+            }
+        }, NewsEntity.class);
     }
 
     @Override
     public void onDownPullRefresh() {
-
+        page = 0;
+        adapter.clearData();
+        getData();
     }
 
     @Override
     public void onLoadingMore() {
-
+        getData();
     }
 
     class NavigationPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -98,7 +129,7 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
     public class NewsListViewAdapter extends BaseAdapter {
 
         private Context context;
-        private ArrayList<NewsEntity> news = new ArrayList<>();
+        private ArrayList<NewsEntity.NewEntity> news = new ArrayList<>();
 
         public NewsListViewAdapter(Context context) {
             this.context = context;
@@ -123,14 +154,14 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
             news.clear();
         }
 
-        public void addGoodsList(ArrayList<NewsEntity> news) {
-            this.news = news;
+        public void addNewsList(ArrayList<NewsEntity.NewEntity> news) {
+            this.news.addAll(news);
             notifyDataSetChanged();
         }
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            final NewsEntity new1 = news.get(position);
+            final NewsEntity.NewEntity newentity = news.get(position);
             ViewHolder holder;
 
             if (convertView == null) {
@@ -153,15 +184,14 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
 
                 @Override
                 public void onClick(View v) {
-//                    String goodsid = good.getGoodsid();
-//                    Intent intent = new Intent(context, ProductDetailActivity.class);
-//                    intent.putExtra(ProductDetailActivity.EXTRA_GOODSID, goodsid);
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context, NewDetailActivity.class);
+                    intent.putExtra(NewDetailActivity.EXTRA_NEWDETAIL, newentity);
+                    context.startActivity(intent);
                 }
             });
-//            ImageLoader.getInstance().displayImage(new1.getGoodsimage(), holder.image_new);
-//            holder.category_productlist_list_item_title.setText(new1.getGoodsname());
-//            holder.category_productlist_list_item_price.setText(new1.getPrice());
+            ImageLoader.getInstance().displayImage(newentity.getImage(), holder.image_new);
+            holder.tv_new_title.setText(newentity.getTitle());
+            holder.tv_new_content.setText(newentity.getContent());
 
             return convertView;
         }

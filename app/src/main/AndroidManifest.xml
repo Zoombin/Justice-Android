@@ -53,13 +53,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
-
-        </activity>
-
-        <activity
-            android:name="com.ufo.judicature.Activity.MapActivity"
-            android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,6 +60,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.ufo.judicature.Activity.MapActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ufo.judicature.Activity.NewDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

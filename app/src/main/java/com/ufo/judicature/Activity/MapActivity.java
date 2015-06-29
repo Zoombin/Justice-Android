@@ -1,10 +1,14 @@
 package com.ufo.judicature.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -32,10 +36,9 @@ import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
+import com.ufo.judicature.Entity.AgencyEntity;
 import com.ufo.judicature.R;
 import com.ufo.judicature.Widget.Toast;
-
-import java.util.ArrayList;
 
 /**
  * baidu map page
@@ -50,9 +53,17 @@ public class MapActivity extends Activity {
     MapView mMapView;
     BaiduMap mBaiduMap;
 
+    private ImageView image_back;
+    private TextView tv_navigation;
     boolean isFirstLoc = true;// 是否首次定位
 
     private Marker mMarker;
+
+    public static final String EXTRA_SERVICE = "SERVICE";
+    private double startlat = 0.0D;
+    private double startlng = 0.0D;
+    private LatLng endlatlng;
+    private AgencyEntity.Service serviceEntity;
 
     // 初始化全局 bitmap 信息，不用时及时 recycle
     BitmapDescriptor bdA = BitmapDescriptorFactory
@@ -67,6 +78,25 @@ public class MapActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        Intent intent = getIntent();
+        serviceEntity = (AgencyEntity.Service) intent.getSerializableExtra(EXTRA_SERVICE);
+        endlatlng = new LatLng(Double.parseDouble(serviceEntity.getLatitude()), Double.parseDouble(serviceEntity.getLongitude()));
+
+        image_back = (ImageView) findViewById(R.id.image_back);
+        image_back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        tv_navigation = (TextView) findViewById(R.id.tv_navigation);
+        tv_navigation.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search();
+            }
+        });
 
         // 地图初始化
         mMapView = (MapView) findViewById(R.id.bmapView);
@@ -90,12 +120,13 @@ public class MapActivity extends Activity {
         mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
                 Button button = new Button(getApplicationContext());
+                button.setTextColor(Color.BLACK);
                 button.setBackgroundResource(R.drawable.popup);
                 if (marker == mMarker) {
-                    button.setText("更改图标");
+                    button.setText(serviceEntity.getName());
                     button.setOnClickListener(new OnClickListener() {
                         public void onClick(View v) {
-							mBaiduMap.hideInfoWindow();
+//							mBaiduMap.hideInfoWindow();
                         }
                     });
                     LatLng ll = marker.getPosition();
@@ -131,12 +162,7 @@ public class MapActivity extends Activity {
                     return;
                 }
                 if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-//		            nodeIndex = -1;
-//		            mBtnPre.setVisibility(View.VISIBLE);
-//		            mBtnNext.setVisibility(View.VISIBLE);
-//		            route = result.getRouteLines().get(0);
                     DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
-//		            routeOverlay = overlay;
                     mBaiduMap.setOnMarkerClickListener(overlay);
                     overlay.setData(result.getRouteLines().get(0));
                     overlay.addToMap();
@@ -144,33 +170,18 @@ public class MapActivity extends Activity {
                 }
             }
         });
+
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(endlatlng);
+        mBaiduMap.animateMapStatus(u);
     }
 
     public void initOverlay() {
         // add marker overlay
-        LatLng llA = new LatLng(39.963175, 116.400244);
-
-        OverlayOptions ooA = new MarkerOptions().position(llA).icon(bdA)
+//        LatLng llA = new LatLng(31.611580, 120.788690);
+        OverlayOptions ooA = new MarkerOptions().position(endlatlng).icon(bdA)
                 .zIndex(9).draggable(true);
         mMarker = (Marker) (mBaiduMap.addOverlay(ooA));
-        ArrayList<BitmapDescriptor> giflist = new ArrayList<>();
-        giflist.add(bdA);
 
-//        mBaiduMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-//            public void onMarkerDrag(Marker marker) {
-//            }
-//
-//            public void onMarkerDragEnd(Marker marker) {
-//                Toast.makeText(
-//                        LocationDemo.this,
-//                        "拖拽结束，新位置：" + marker.getPosition().latitude + ", "
-//                                + marker.getPosition().longitude,
-//                        Toast.LENGTH_LONG).show();
-//            }
-//
-//            public void onMarkerDragStart(Marker marker) {
-//            }
-//        });
     }
 
     //定制RouteOverly
@@ -207,19 +218,23 @@ public class MapActivity extends Activity {
             // map view 销毁后不在处理新接收的位置
             if (location == null || mMapView == null)
                 return;
+
+            startlat = location.getLatitude();
+            startlng = location.getLongitude();
+
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                             // 此处设置开发者获取到的方向信息，顺时针0-360
                     .direction(100).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
-            if (isFirstLoc) {
-                isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(),
-                        location.getLongitude());
-                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-                mBaiduMap.animateMapStatus(u);
-            }
+//            if (isFirstLoc) {
+//                isFirstLoc = false;
+//                LatLng ll = new LatLng(location.getLatitude(),
+//                        location.getLongitude());
+//                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+//                mBaiduMap.animateMapStatus(u);
+//            }
         }
 
         public void onReceivePoi(BDLocation poiLocation) {
@@ -250,11 +265,16 @@ public class MapActivity extends Activity {
     }
 
     private void search() {
-        mBaiduMap.clear();
+        if (startlat == 0.0 || startlng == 0.0) {
+            Toast.show(MapActivity.this, "定位未成功，无法导航！");
+            return;
+        }
+
+//        mBaiduMap.clear();
 
         //设置起终点信息，对于tranist search 来说，城市名无意义
-        PlanNode stNode = PlanNode.withLocation(new LatLng(1.1, 1.1));
-        PlanNode enNode = PlanNode.withLocation(new LatLng(1.2, 1.2));
+        PlanNode stNode = PlanNode.withLocation(new LatLng(startlat, startlng));
+        PlanNode enNode = PlanNode.withLocation(endlatlng);
 
 //        PlanNode stNode = PlanNode.withCityNameAndPlaceName("北京", "龙泽");
 //        PlanNode enNode = PlanNode.withCityNameAndPlaceName("北京", "西单");

@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@color/main_color">
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:id="@+id/tv_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dip"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="导航" />
+    </RelativeLayout>
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
@@ -9,4 +36,4 @@
         android:layout_height="fill_parent"
         android:clickable="true" />
 
-</RelativeLayout>
+</LinearLayout>

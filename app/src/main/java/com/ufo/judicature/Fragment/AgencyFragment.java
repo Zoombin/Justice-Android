@@ -1,6 +1,7 @@
 package com.ufo.judicature.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ufo.judicature.Activity.MapActivity;
 import com.ufo.judicature.Base.BaseFragment;
 import com.ufo.judicature.Entity.AgencyEntity;
 import com.ufo.judicature.Entity.ServiceResult;
@@ -28,7 +31,7 @@ public class AgencyFragment extends BaseFragment {
     private ExpandableListView lv_agency;
     private MyExpandableListViewAdapter adapter;
     private ArrayList<String> group_list= new ArrayList<>();
-    private ArrayList<ArrayList<String>> item_list = new ArrayList<>();
+    private ArrayList<ArrayList<AgencyEntity.Service>> item_list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,18 +118,30 @@ public class AgencyFragment extends BaseFragment {
         @Override
         public View getChildView(int groupPosition, int childPosition,
                                  boolean isLastChild, View convertView, ViewGroup parent) {
+            final AgencyEntity.Service serviceEntity = item_list.get(groupPosition).get(
+                    childPosition);
+
             ItemHolder itemHolder = null;
             if (convertView == null) {
                 convertView = (View) mActivity.getLayoutInflater().from(context).inflate(
                         R.layout.agency_item_sub, null);
                 itemHolder = new ItemHolder();
+                itemHolder.ly_service_sub = (LinearLayout) convertView.findViewById(R.id.ly_service_sub);
                 itemHolder.txt = (TextView) convertView.findViewById(R.id.tv_service);
                 convertView.setTag(itemHolder);
             } else {
                 itemHolder = (ItemHolder) convertView.getTag();
             }
-            itemHolder.txt.setText(item_list.get(groupPosition).get(
-                    childPosition));
+
+            itemHolder.ly_service_sub.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, MapActivity.class);
+                    intent.putExtra(MapActivity.EXTRA_SERVICE, serviceEntity);
+                    startActivity(intent);
+                }
+            });
+            itemHolder.txt.setText(serviceEntity.getName());
             return convertView;
         }
 
@@ -142,6 +157,7 @@ public class AgencyFragment extends BaseFragment {
     }
 
     class ItemHolder {
+        public LinearLayout ly_service_sub;
         public TextView txt;
     }
 
@@ -156,13 +172,9 @@ public class AgencyFragment extends BaseFragment {
 
                     ArrayList<AgencyEntity.Service> servicesub = service.getServices();
                     if (servicesub != null) {
-                        ArrayList<String> sub = new ArrayList<>();
-                        for (AgencyEntity.Service service1 : servicesub) {
-                            sub.add(service1.getName());
-                        }
-                        item_list.add(sub);
+                        item_list.add(servicesub);
                     } else {
-                        item_list.add(new ArrayList<String>());
+                        item_list.add(new ArrayList<AgencyEntity.Service>());
                     }
                 }
                 adapter.notifyDataSetChanged();

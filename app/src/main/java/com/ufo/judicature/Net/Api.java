@@ -27,6 +27,16 @@ public class Api {
     }
 
     /**
+     * 新闻banner
+     * @param context
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getBanner(Context context, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getBannerNews", null, netCallBack, rspCls);
+    }
+
+    /**
      * 视频
      * @param context
      * @param page

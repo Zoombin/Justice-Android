@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +23,8 @@ import com.ufo.judicature.R;
 import com.ufo.judicature.Widget.OnRefreshListener;
 import com.ufo.judicature.Widget.RefreshListView;
 import com.ufo.judicature.Widget.Toast;
+import com.ufo.judicature.Widget.viewpager.CirclePageIndicator;
+import com.ufo.judicature.Widget.viewpager.RecyclingPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -33,12 +34,12 @@ import java.util.ArrayList;
 public class PropagandaNewsFragment extends BaseFragment implements OnRefreshListener {
 
     private RefreshListView lv_news;
-    private int currentItem;
+    private CirclePageIndicator indicator;
     private View header;
     private ViewPager guidePages;
-    private LinearLayout viewGroup;
     private NewsListViewAdapter adapter;
     private int page = 0;
+    private NewViewPagerAdapter viewpageradapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,18 +55,100 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
 
         header = LayoutInflater.from(mActivity).inflate(R.layout.viewpage_header, null);
         guidePages = (ViewPager) header.findViewById(R.id.guidePages);
-        viewGroup = (LinearLayout) header.findViewById(R.id.viewGroup);
+
+        viewpageradapter = new NewViewPagerAdapter(mActivity);
+        guidePages.setAdapter(viewpageradapter);
+
+        indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
+        indicator.setViewPager(guidePages);
 
         adapter = new NewsListViewAdapter(mActivity);
         lv_news.addHeaderView(header);
         lv_news.setAdapter(adapter);
         lv_news.setOnRefreshListener(this);
+    }
 
-        guidePages.addOnPageChangeListener(new NavigationPageChangeListener());
+    public class NewViewPagerAdapter extends RecyclingPagerAdapter {
+        private Context context;
+        private ArrayList<NewsEntity.NewEntity> banners = new ArrayList<>();
+
+        public NewViewPagerAdapter(Context context) {
+            this.context = context;
+        }
+
+        public void clearData() {
+            banners.clear();
+            notifyDataSetChanged();
+        }
+
+        public void addBannerList(ArrayList<NewsEntity.NewEntity> banners) {
+            this.banners = banners;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return banners.size();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup container) {
+            final NewsEntity.NewEntity bannerEntity = banners.get(position);
+
+            ViewHolder holder;
+
+            if (convertView == null) {
+                convertView = LayoutInflater.from(context).inflate(
+                        R.layout.banner_viewpager_item, container, false);
+
+                holder = new ViewHolder();
+
+                holder.image_banner = (ImageView) convertView.findViewById(R.id.image_banner);
+                holder.tv_banner_title = (TextView) convertView.findViewById(R.id.tv_banner_title);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            ImageLoader.getInstance().displayImage(bannerEntity.getImage(), holder.image_banner);
+            holder.image_banner.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, NewDetailActivity.class);
+                    intent.putExtra(NewDetailActivity.EXTRA_NEWDETAIL, bannerEntity);
+                    context.startActivity(intent);
+                }
+            });
+            holder.tv_banner_title.setText(bannerEntity.getTitle());
+
+            return convertView;
+        }
+
+        public class ViewHolder {
+            ImageView image_banner;
+            TextView tv_banner_title;
+        }
     }
 
     private void initData() {
+        getBanner();
         getData();
+    }
+
+    private void getBanner() {
+        Api.getBanner(mActivity, new NetUtils.NetCallBack<ServiceResult>() {
+            @Override
+            public void success(ServiceResult rspData) {
+                NewsEntity entity = (NewsEntity) rspData;
+                ArrayList<NewsEntity.NewEntity> banners = entity.getData();
+                viewpageradapter.addBannerList(banners);
+            }
+
+            @Override
+            public void failed(String msg) {
+                Toast.show(mActivity, msg);
+            }
+        }, NewsEntity.class);
     }
 
     private void getData() {
@@ -92,38 +175,14 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
     @Override
     public void onDownPullRefresh() {
         page = 0;
+        viewpageradapter.clearData();
         adapter.clearData();
-        getData();
+        initData();
     }
 
     @Override
     public void onLoadingMore() {
         getData();
-    }
-
-    class NavigationPageChangeListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-//            currentItem = arg0;
-//            for (int i = 0; i < imageViews.length; i++) {
-//                if (arg0 == i) {
-//                    imageViews[i].setImageDrawable(getResources().getDrawable(R.drawable.page_focused));
-//                } else {
-//                    imageViews[i].setImageDrawable(getResources().getDrawable(R.drawable.page_unfocused));
-//                }
-//            }
-        }
     }
 
     public class NewsListViewAdapter extends BaseAdapter {

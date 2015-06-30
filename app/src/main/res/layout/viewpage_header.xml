@@ -22,14 +22,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" >
 
-                <LinearLayout
-                    android:id="@+id/viewGroup"
+                <com.ufo.judicature.Widget.viewpager.CirclePageIndicator
+                    android:id="@+id/indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:orientation="horizontal" >
-                </LinearLayout>
+                    android:layout_centerVertical="true" >
+                </com.ufo.judicature.Widget.viewpager.CirclePageIndicator>
                 
             </RelativeLayout>
         </FrameLayout>

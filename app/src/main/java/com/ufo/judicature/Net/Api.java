@@ -26,7 +26,39 @@ public class Api {
         NetUtils.getValue(context, "?action=getNews&page=" + page, null, netCallBack, rspCls);
     }
 
+    /**
+     * 视频
+     * @param context
+     * @param page
+     * @param netCallBack
+     * @param rspCls
+     */
     public static void getVideos(Context context, int page, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=getVideos&page=" + page, null, netCallBack, rspCls);
+    }
+
+    /**
+     * 我的预约
+     * @param context
+     * @param userid
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getMyReservation(Context context, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getReservation&userid=" + userid, null, netCallBack, rspCls);
+    }
+
+    /**
+     * 我要预约
+     * @param context
+     * @param userid
+     * @param name
+     * @param identityNumber
+     * @param phone
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getreserve&userid=" + userid + "&name=" + name + "&phone=" + phone + "&identityNumber=" + identityNumber, null, netCallBack, rspCls);
     }
 }

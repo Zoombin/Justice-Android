@@ -13,6 +13,7 @@
         android:id="@+id/tv_banner_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
         android:singleLine="true"
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"

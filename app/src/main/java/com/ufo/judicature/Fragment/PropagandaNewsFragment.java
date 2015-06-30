@@ -59,7 +59,7 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
         viewpageradapter = new NewViewPagerAdapter(mActivity);
         guidePages.setAdapter(viewpageradapter);
 
-        indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
+        indicator = (CirclePageIndicator) header.findViewById(R.id.indicator);
         indicator.setViewPager(guidePages);
 
         adapter = new NewsListViewAdapter(mActivity);

@@ -29,7 +29,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true" >
                 </com.ufo.judicature.Widget.viewpager.CirclePageIndicator>
-                
+
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>

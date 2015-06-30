@@ -82,4 +82,25 @@ public class Api {
     public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=getreserve&userid=" + userid + "&name=" + name + "&phone=" + phone + "&identityNumber=" + identityNumber, null, netCallBack, rspCls);
     }
+
+    /**
+     * 用户信息
+     * @param context
+     * @param userid
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getUserInfo(Context context, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getUserInfo&user_id=" + userid, "正在获取积分信息，请稍等...", netCallBack, rspCls);
+    }
+
+    /**
+     * 试卷获得
+     * @param context
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getQuestion(Context context, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getQuestions", "正在获取试题信息，请稍等...", netCallBack, rspCls);
+    }
 }

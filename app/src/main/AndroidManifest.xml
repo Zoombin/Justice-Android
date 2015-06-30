@@ -79,6 +79,10 @@
         <activity
             android:name="com.ufo.judicature.Activity.NotarizationInfoActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ufo.judicature.Activity.PhotoDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

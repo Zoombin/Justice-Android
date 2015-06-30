@@ -38,6 +38,17 @@ public class Api {
     }
 
     /**
+     * 图片
+     * @param context
+     * @param page
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getPhotos(Context context, int page, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getGalleries&page=" + page, null, netCallBack, rspCls);
+    }
+
+    /**
      * 我的预约
      * @param context
      * @param userid

@@ -39,7 +39,7 @@
             android:value="QX04ZpdGeo75MMlq0akSlmZH" />
 
         <!-- 设置环信应用的appkey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="ufpplus#ufojudicature" />
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="zoombin#justice" />
         <!-- 声明sdk所需的service SDK核心功能-->
         <service android:name="com.easemob.chat.EMChatService" />
 

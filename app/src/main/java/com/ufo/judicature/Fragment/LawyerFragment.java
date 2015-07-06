@@ -13,6 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.ufo.judicature.Entity.LawyersEntity;
+import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.Entity.UserInfoEntity;
+import com.ufo.judicature.Net.Api;
+import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.Widget.Toast;
 
 import com.easemob.EMCallBack;
@@ -53,6 +59,8 @@ public class LawyerFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        initData();
 
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -99,6 +107,21 @@ public class LawyerFragment extends BaseFragment {
             usernameEditText.setText(JudiApplication.getInstance().getUserName());
         }
         return v;
+    }
+
+    private void initData() {
+//        Api.getLawyers(mActivity, new NetUtils.NetCallBack<ServiceResult>() {
+//            @Override
+//            public void success(ServiceResult rspData) {
+//                LawyersEntity lawyersEntity = (LawyersEntity) rspData;
+//                lawyersEntity.getData();
+//            }
+//
+//            @Override
+//            public void failed(String msg) {
+//                Toast.show(mActivity, msg);
+//            }
+//        }, LawyersEntity.class);
     }
 
     /**

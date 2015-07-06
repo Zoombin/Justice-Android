@@ -126,4 +126,14 @@ public class Api {
     public static void addMyScore(Context context, String userid, String score, String examination_id, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=addMyScore" + "&user_id=" + userid + "&score=" + score + "&examination_id=" + examination_id, "正在提交。。。", netCallBack, rspCls);
     }
+
+    /**
+     * 获取律师列表
+     * @param context
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getLawyers(Context context, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getLawyers", "正在获取律师列表。。。", netCallBack, rspCls);
+    }
 }

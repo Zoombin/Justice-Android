@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ufo.judicature.Base.BaseActivity;
+import com.ufo.judicature.Entity.DoNortarizationEntity;
 import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.ServiceResult;
 import com.ufo.judicature.Net.Api;
@@ -19,6 +21,7 @@ import com.ufo.judicature.Widget.Toast;
  */
 public class DoNotarizationActivity extends BaseActivity {
 
+    private ImageView image_back;
     private TextView tv_commit;
     private EditText tv_nortarization_name;
     private EditText tv_nortarization_idcard;
@@ -33,6 +36,13 @@ public class DoNotarizationActivity extends BaseActivity {
     }
 
     private void initView() {
+        image_back = (ImageView) findViewById(R.id.image_back);
+        image_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         tv_commit = (TextView) findViewById(R.id.tv_commit);
         tv_commit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,17 +73,18 @@ public class DoNotarizationActivity extends BaseActivity {
         }
 
         String userid = "1";
-        Api.getDoReservation(self, userid, name, idcard, phone, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getDoReservation(self, userid, name, idcard, phone, "2015-07-07", new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
-//                Toast.show(self, msg);
-
+                DoNortarizationEntity doNortarizationEntity = (DoNortarizationEntity) rspData;
+                Toast.show(self, doNortarizationEntity.getMsg());
+                finish();
             }
 
             @Override
             public void failed(String msg) {
                 Toast.show(self, msg);
             }
-        }, NewsEntity.class);
+        }, DoNortarizationEntity.class);
     }
 }

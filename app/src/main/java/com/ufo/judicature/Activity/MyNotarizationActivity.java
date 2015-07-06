@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ufo.judicature.Base.BaseActivity;
+import com.ufo.judicature.Entity.MyNortarizationEntity;
 import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.ServiceResult;
 import com.ufo.judicature.Net.Api;
@@ -30,7 +31,6 @@ public class MyNotarizationActivity extends BaseActivity {
         initData();
     }
 
-
     private void initView() {
         image_back = (ImageView) findViewById(R.id.image_back);
         image_back.setOnClickListener(new View.OnClickListener() {
@@ -47,13 +47,20 @@ public class MyNotarizationActivity extends BaseActivity {
         Api.getMyReservation(self, userid, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
-//                tv_mynotarization.setText();
+                MyNortarizationEntity myNortarizationEntity = (MyNortarizationEntity) rspData;
+                MyNortarizationEntity.NortarizationInfo nortarizationInfo = myNortarizationEntity.getData();
+                if (nortarizationInfo != null) {
+                    tv_mynotarization.setText("姓名：" + nortarizationInfo.getName() + "\n" +
+                            "身份证：" + nortarizationInfo.getIdentity_number() + "\n" +
+                            "手机号码：" + nortarizationInfo.getReserve_date() + "\n" +
+                            "预约时间：" + nortarizationInfo.getPhone());
+                }
             }
 
             @Override
             public void failed(String msg) {
                 Toast.show(self, msg);
             }
-        }, NewsEntity.class);
+        }, MyNortarizationEntity.class);
     }
 }

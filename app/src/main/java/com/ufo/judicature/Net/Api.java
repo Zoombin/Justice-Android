@@ -66,7 +66,7 @@ public class Api {
      * @param rspCls
      */
     public static void getMyReservation(Context context, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=getReservation&userid=" + userid, null, netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=getMyReservation&user_id=" + userid, null, netCallBack, rspCls);
     }
 
     /**
@@ -79,8 +79,8 @@ public class Api {
      * @param netCallBack
      * @param rspCls
      */
-    public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=getreserve&userid=" + userid + "&name=" + name + "&phone=" + phone + "&identityNumber=" + identityNumber, null, netCallBack, rspCls);
+    public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, String date, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=reserve&user_id=" + userid + "&name=" + name + "&phone=" + phone + "&identityNumber=" + identityNumber + "&reserve_date=" + date, null, netCallBack, rspCls);
     }
 
     /**

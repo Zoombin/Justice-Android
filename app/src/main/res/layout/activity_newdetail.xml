@@ -37,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dip"
-                android:layout_marginBottom="5dip"
                 android:textSize="20sp"
                 android:textColor="@color/app_text_black" />
 
@@ -46,16 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY" />
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:id="@+id/tv_new_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dip"
                 android:layout_marginBottom="10dip"
-                android:text="@string/logo"
                 android:textSize="16sp"
                 android:textColor="@color/app_text_black" />
         </LinearLayout>

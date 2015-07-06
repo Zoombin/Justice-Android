@@ -14,8 +14,6 @@ import com.ufo.judicature.Base.BaseActivity;
 import com.ufo.judicature.R;
 import com.ufo.judicature.Utils.Config;
 
-//import com.ufo.judicature.R;
-
 /**
  * logo page
  * 

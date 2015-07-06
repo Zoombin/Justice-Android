@@ -52,8 +52,8 @@ public class MyNotarizationActivity extends BaseActivity {
                 if (nortarizationInfo != null) {
                     tv_mynotarization.setText("姓名：" + nortarizationInfo.getName() + "\n" +
                             "身份证：" + nortarizationInfo.getIdentity_number() + "\n" +
-                            "手机号码：" + nortarizationInfo.getReserve_date() + "\n" +
-                            "预约时间：" + nortarizationInfo.getPhone());
+                            "预约时间：" + nortarizationInfo.getPhone() + "\n" +
+                            "手机号码：" + nortarizationInfo.getReserve_date());
                 }
             }
 

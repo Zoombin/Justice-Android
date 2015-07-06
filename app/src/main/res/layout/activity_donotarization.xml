@@ -39,6 +39,17 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
+
+    <Button
+        android:id="@+id/btn_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="20dip"
+        android:text="请选择预约时间"
+        android:textSize="15sp"/>
+
     <EditText
         android:id="@+id/tv_nortarization_name"
         android:layout_width="match_parent"
@@ -48,7 +59,7 @@
         android:layout_marginTop="20dip"
         android:hint="姓名"
         android:textColor="@color/app_text_black"
-        android:textSize="15dip" />
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/tv_nortarization_idcard"
@@ -59,7 +70,7 @@
         android:layout_marginTop="20dip"
         android:hint="身份证号"
         android:textColor="@color/app_text_black"
-        android:textSize="15dip" />
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/tv_nortarization_phone"
@@ -70,5 +81,5 @@
         android:layout_marginTop="20dip"
         android:hint="手机号码"
         android:textColor="@color/app_text_black"
-        android:textSize="15dip" />
+        android:textSize="15sp" />
 </LinearLayout>

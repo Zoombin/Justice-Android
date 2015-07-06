@@ -54,7 +54,7 @@ public class LawyerFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.activity_login, container, false);
+        View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         // 如果用户名密码都有，直接进入主页面
         if (DemoHXSDKHelper.getInstance().isLogined()) {

@@ -47,6 +47,7 @@ public class PropagandaPhotoFragment extends BaseFragment implements OnRefreshLi
         lv_photo = (RefreshListView) v.findViewById(R.id.lv_photo);
         adapter = new PhotoListViewAdapter(mActivity);
         lv_photo.setAdapter(adapter);
+        lv_photo.setOnRefreshListener(this);
     }
 
     @Override
@@ -112,6 +113,7 @@ public class PropagandaPhotoFragment extends BaseFragment implements OnRefreshLi
 
         public void clearData() {
             photos.clear();
+            notifyDataSetChanged();
         }
 
         public void addPhotosList(ArrayList<PhotosEntity.PhotoEntity> photos) {

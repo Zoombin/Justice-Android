@@ -46,8 +46,8 @@ public class PropagandaVideoFragment extends BaseFragment implements OnRefreshLi
     private void createView(View v) {
         lv_video = (RefreshListView) v.findViewById(R.id.lv_video);
         adapter = new VideoListViewAdapter(mActivity);
-
         lv_video.setAdapter(adapter);
+        lv_video.setOnRefreshListener(this);
     }
 
     private void initData() {
@@ -113,6 +113,7 @@ public class PropagandaVideoFragment extends BaseFragment implements OnRefreshLi
 
         public void clearData() {
             videos.clear();
+            notifyDataSetChanged();
         }
 
         public void addVideosList(ArrayList<VideosEntity.VideoEntity> videos) {

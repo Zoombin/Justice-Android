@@ -103,4 +103,27 @@ public class Api {
     public static void getQuestion(Context context, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=getQuestions", "正在获取试题信息，请稍等...", netCallBack, rspCls);
     }
+
+    /**
+     * 预约时间
+     * @param context
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void getReserveDate(Context context, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getReserveDate", null, netCallBack, rspCls);
+    }
+
+    /**
+     * 考试得分
+     * @param context
+     * @param userid
+     * @param score
+     * @param examination_id
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void addMyScore(Context context, String userid, String score, String examination_id, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=addMyScore" + "&user_id=" + userid + "&score=" + score + "&examination_id=" + examination_id, "正在提交。。。", netCallBack, rspCls);
+    }
 }

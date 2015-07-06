@@ -7,10 +7,9 @@ import java.util.ArrayList;
  * 题目
  */
 public class QuestionEntity extends ServiceResult implements Serializable {
-//    {"data":[{"id":"1","examination_id":"2","type":"0","question":"\u4e2d\u56fd\u53f8\u6cd5\u662f\u5426\u516c\u6b63\uff1f","a":null,"b":null,"c":null,"d"
-// :null,"e":null,"f":null,"yes_or_no":"1","answer":""},
-// {"id":"3","examination_id":"2","type":"1","question":"\u4eba\u4f53\u8425\u517b\u72b6\u51b5\u8bc4\u4ef7\u6307\u6807\u5305\u542b\uff1a","a":"\u4f53\u91cd\u6307\u6570","b":"\u4f53\u91cd","c":"\u808c\u809d\u5347\u9ad8\u6307\u6570","d":"\u86cb\u767d\u8d28\u8d28\u91cf\u6307\u6807","e":"\u514d\u75ab\u6307\u6807","f":null,"yes_or_no":"0","answer":"a,b,c,d"},{"id":"4","examination_id":"2","type":"1","question":"\u6574\u4f53\u62a4\u7406\u7684\u6307\u5bfc\u601d\u60f3\u662f\uff1a","a":"\u4ee5\u95ee\u9898\u4e3a\u672c","b":"\u4ee5\u4eba\u4e3a\u672c","c":"\u4ee5\u62a4\u7406\u5bf9\u8c61\u7684\u751f\u7406\u9700\u8981\u4e3a\u672c","d":"\u4ee5\u62a4\u7406\u5bf9\u8c61\u7684\u5fc3\u7406\u9700\u8981\u4e3a\u672c","e":null,"f":null,"yes_or_no":"0","answer":"b"}],"error":false,"msg":""}private ArrayList<NewEntity> data;
-
+//    {"data":[{"id":"2","examination_id":"1","type":"1","question":"\u6574\u4f53\u62a4\u7406\u7684\u6307\u5bfc\u601d\u60f3\u662f\uff1a",
+//            "a":"\u4ee5\u95ee\u9898\u4e3a\u672c","b":"\u4ee5\u4eba\u4e3a\u672c","c":"\u4ee5\u62a4\u7406\u5bf9\u8c61\u7684\u751f\u7406\u9700\u8981\u4e3a\u672c",
+//            "d":"\u4ee5\u62a4\u7406\u5bf9\u8c61\u7684\u5fc3\u7406\u9700\u8981\u4e3a\u672c","e":null,"f":null,"yes_or_no":"0","answer":"b"}],"error":false,"msg":""}
     private ArrayList<QuestionInfo> data;
 
     public ArrayList<QuestionInfo> getData() {

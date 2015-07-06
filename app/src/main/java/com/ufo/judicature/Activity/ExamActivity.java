@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ufo.judicature.Base.BaseActivity;
+import com.ufo.judicature.Entity.ExamEntity;
 import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.QuestionEntity;
 import com.ufo.judicature.Entity.ServiceResult;
@@ -36,6 +38,11 @@ public class ExamActivity extends BaseActivity {
     private TextView tv_commit;
     private ViewPager pager_questions;
     private QuestionViewPagerAdapter adapter;
+    private String examination_id;
+
+    private Integer[] scores;
+    // 单题得分
+    private int onesource = 10;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +63,7 @@ public class ExamActivity extends BaseActivity {
         ((TextView)findViewById(R.id.tv_commit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                upLoad();
             }
         });
         pager_questions = (ViewPager) findViewById(R.id.pager_questions);
@@ -89,10 +96,10 @@ public class ExamActivity extends BaseActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup container) {
+        public View getView(final int position, View convertView, ViewGroup container) {
             final QuestionEntity.QuestionInfo questionInfo = questionInfos.get(position);
 
-            ViewHolder holder;
+            final ViewHolder holder;
 
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(
@@ -123,26 +130,206 @@ public class ExamActivity extends BaseActivity {
 
             holder.tv_question.setText((position + 1) + ". " + questionInfo.getQuestion());
             String type = questionInfo.getType();
-            if (type.equals("0")) {
+            if (type.equals("1")) {
                 holder.ly_singleselect.setVisibility(View.VISIBLE);
                 holder.ly_multiselect.setVisibility(View.GONE);
                 holder.ly_judge.setVisibility(View.GONE);
                 holder.rb_single_a.setText(questionInfo.getA());
+                holder.rb_single_a.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (isChecked) {
+                            aw = "a";
+                        } else {
+                            return;
+                        }
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
                 holder.rb_single_b.setText(questionInfo.getB());
+                holder.rb_single_b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (isChecked) {
+                            aw = "b";
+                        } else {
+                            return;
+                        }
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
                 holder.rb_single_c.setText(questionInfo.getC());
+                holder.rb_single_c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (isChecked) {
+                            aw = "c";
+                        } else {
+                            return;
+                        }
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
                 holder.rb_single_d.setText(questionInfo.getD());
-            } else if (type.equals("1")) {
+                holder.rb_single_d.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (isChecked) {
+                            aw = "d";
+                        } else {
+                            return;
+                        }
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
+            } else if (type.equals("2")) {
                 holder.ly_singleselect.setVisibility(View.GONE);
                 holder.ly_multiselect.setVisibility(View.VISIBLE);
                 holder.ly_judge.setVisibility(View.GONE);
                 holder.rb_multi_a.setText(questionInfo.getA());
+                holder.rb_multi_a.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (holder.rb_single_a.isChecked()) {
+                            aw += "a,";
+                        }
+                        if (holder.rb_single_b.isChecked()) {
+                            aw += "b,";
+                        }
+                        if (holder.rb_single_c.isChecked()) {
+                            aw += "c,";
+                        }
+                        if (holder.rb_single_d.isChecked()) {
+                            aw += "d,";
+                        }
+                        aw = aw.substring(0, aw.length() - 1);
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
                 holder.rb_multi_b.setText(questionInfo.getB());
+                holder.rb_multi_b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (holder.rb_single_a.isChecked()) {
+                            aw += "a,";
+                        }
+                        if (holder.rb_single_b.isChecked()) {
+                            aw += "b,";
+                        }
+                        if (holder.rb_single_c.isChecked()) {
+                            aw += "c,";
+                        }
+                        if (holder.rb_single_d.isChecked()) {
+                            aw += "d,";
+                        }
+                        aw = aw.substring(0, aw.length() - 1);
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
                 holder.rb_multi_c.setText(questionInfo.getC());
+                holder.rb_multi_c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (holder.rb_single_a.isChecked()) {
+                            aw += "a,";
+                        }
+                        if (holder.rb_single_b.isChecked()) {
+                            aw += "b,";
+                        }
+                        if (holder.rb_single_c.isChecked()) {
+                            aw += "c,";
+                        }
+                        if (holder.rb_single_d.isChecked()) {
+                            aw += "d,";
+                        }
+                        aw = aw.substring(0, aw.length() - 1);
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
                 holder.rb_multi_d.setText(questionInfo.getD());
-            } else if (type.equals("2")) {
+                holder.rb_multi_d.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
+                        if (holder.rb_single_a.isChecked()) {
+                            aw += "a,";
+                        }
+                        if (holder.rb_single_b.isChecked()) {
+                            aw += "b,";
+                        }
+                        if (holder.rb_single_c.isChecked()) {
+                            aw += "c,";
+                        }
+                        if (holder.rb_single_d.isChecked()) {
+                            aw += "d,";
+                        }
+                        aw = aw.substring(0, aw.length() - 1);
+                        if (aw.equals(questionInfo.getAnswer())) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
+            } else if (type.equals("0")) {
                 holder.ly_singleselect.setVisibility(View.GONE);
                 holder.ly_multiselect.setVisibility(View.GONE);
                 holder.ly_judge.setVisibility(View.VISIBLE);
+                holder.rb_yes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (questionInfo.getYes_or_no().equals("1")) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
+                holder.rb_no.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (questionInfo.getYes_or_no().equals("0")) {
+                            scores[position] = onesource;
+                        } else {
+                            scores[position] = 0;
+                        }
+                    }
+                });
             }
 
             return convertView;
@@ -174,7 +361,9 @@ public class ExamActivity extends BaseActivity {
             public void success(ServiceResult rspData) {
                 QuestionEntity questionEntity = (QuestionEntity) rspData;
                 ArrayList<QuestionEntity.QuestionInfo> questionInfos = questionEntity.getData();
+                examination_id = questionInfos.get(0).getExamination_id();
                 if (questionInfos != null) {
+                    scores = new Integer[questionInfos.size()];
                     adapter.addQuestionList(questionInfos);
                 } else {
                     Toast.show(self, "无试卷信息！");
@@ -187,5 +376,26 @@ public class ExamActivity extends BaseActivity {
                 Toast.show(self, msg);
             }
         }, QuestionEntity.class);
+    }
+
+    private void upLoad() {
+        int s1 = 0;
+        for (int s : scores) {
+            s1 += s;
+        }
+        String userid = "1";
+        Api.addMyScore(self, userid, Integer.toString(s1), examination_id, new NetUtils.NetCallBack<ServiceResult>() {
+            @Override
+            public void success(ServiceResult rspData) {
+                ExamEntity examEntity = (ExamEntity) rspData;
+                Toast.show(self, examEntity.getMsg());
+                finish();
+            }
+
+            @Override
+            public void failed(String msg) {
+                Toast.show(self, msg);
+            }
+        }, ExamEntity.class);
     }
 }

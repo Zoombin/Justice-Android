@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_bg_color">
+    android:background="@color/app_bg_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/top_bar_normal_bg"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="服务机构"
+            android:textColor="@color/bottom_text_color_normal"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <ExpandableListView
         android:id="@+id/lv_agency"
@@ -13,4 +30,4 @@
         android:dividerHeight="1.0dip">
     </ExpandableListView>
 
-</RelativeLayout>
+</LinearLayout>

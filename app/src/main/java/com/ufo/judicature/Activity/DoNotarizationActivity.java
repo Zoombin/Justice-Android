@@ -16,6 +16,7 @@ import com.ufo.judicature.Entity.DoNortarizationEntity;
 import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.ReserveDateEntity;
 import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
@@ -119,8 +120,7 @@ public class DoNotarizationActivity extends BaseActivity {
             return;
         }
 
-        String userid = "1";
-        Api.getDoReservation(self, userid, name, idcard, phone, date, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getDoReservation(self, JudiApplication.getInstance().getUserName(), name, idcard, phone, date, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 DoNortarizationEntity doNortarizationEntity = (DoNortarizationEntity) rspData;

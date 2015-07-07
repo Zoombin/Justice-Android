@@ -9,6 +9,7 @@ import com.ufo.judicature.Base.BaseActivity;
 import com.ufo.judicature.Entity.MyNortarizationEntity;
 import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
@@ -43,8 +44,7 @@ public class MyNotarizationActivity extends BaseActivity {
     }
 
     private void initData() {
-        String userid = "1";
-        Api.getMyReservation(self, userid, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getMyReservation(self, JudiApplication.getInstance().getUserName(), new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 MyNortarizationEntity myNortarizationEntity = (MyNortarizationEntity) rspData;

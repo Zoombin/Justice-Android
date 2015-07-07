@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.ufo.judicature.Activity.ExamActivity;
 import com.ufo.judicature.Base.BaseFragment;
 import com.ufo.judicature.Entity.ServiceResult;
 import com.ufo.judicature.Entity.UserInfoEntity;
+import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
@@ -44,25 +47,30 @@ public class ExamFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initData() {
-        String userid = "1";
-        Api.getUserInfo(mActivity, userid, new NetUtils.NetCallBack<ServiceResult>() {
-            @Override
-            public void success(ServiceResult rspData) {
-                UserInfoEntity entity = (UserInfoEntity) rspData;
-                tv_myintegration.setText("我的积分：" + entity.getData().getScore());
-            }
+        if (DemoHXSDKHelper.getInstance().isLogined()) {
+            Api.getUserInfo(mActivity, JudiApplication.getInstance().getUserName(), new NetUtils.NetCallBack<ServiceResult>() {
+                @Override
+                public void success(ServiceResult rspData) {
+                    UserInfoEntity entity = (UserInfoEntity) rspData;
+                    tv_myintegration.setText("我的积分：" + entity.getData().getScore());
+                }
 
-            @Override
-            public void failed(String msg) {
-                Toast.show(mActivity, msg);
-            }
-        }, UserInfoEntity.class);
+                @Override
+                public void failed(String msg) {
+                    Toast.show(mActivity, msg);
+                }
+            }, UserInfoEntity.class);
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_exam:
+                if (!DemoHXSDKHelper.getInstance().isLogined()) {
+                    startActivity(new Intent(mActivity, LoginActivity.class));
+                    return;
+                }
                 Intent intent = new Intent(mActivity, ExamActivity.class);
                 startActivity(intent);
                 break;

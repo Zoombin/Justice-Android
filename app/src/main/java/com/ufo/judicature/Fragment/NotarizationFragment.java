@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.ufo.judicature.Activity.DoNotarizationActivity;
 import com.ufo.judicature.Activity.MyNotarizationActivity;
 import com.ufo.judicature.Activity.NotarizationInfoActivity;
@@ -48,10 +50,18 @@ public class NotarizationFragment extends BaseFragment implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_do_notarization:
+                if (!DemoHXSDKHelper.getInstance().isLogined()) {
+                    startActivity(new Intent(mActivity, LoginActivity.class));
+                    return;
+                }
                 intent = new Intent(mActivity, DoNotarizationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_my_notarization:
+                if (!DemoHXSDKHelper.getInstance().isLogined()) {
+                    startActivity(new Intent(mActivity, LoginActivity.class));
+                    return;
+                }
                 intent = new Intent(mActivity, MyNotarizationActivity.class);
                 startActivity(intent);
                 break;

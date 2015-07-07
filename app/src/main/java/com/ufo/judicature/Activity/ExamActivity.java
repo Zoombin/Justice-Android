@@ -21,6 +21,7 @@ import com.ufo.judicature.Entity.ExamEntity;
 import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.QuestionEntity;
 import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
@@ -383,8 +384,7 @@ public class ExamActivity extends BaseActivity {
         for (int s : scores) {
             s1 += s;
         }
-        String userid = "1";
-        Api.addMyScore(self, userid, Integer.toString(s1), examination_id, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.addMyScore(self, JudiApplication.getInstance().getUserName(), Integer.toString(s1), examination_id, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 ExamEntity examEntity = (ExamEntity) rspData;

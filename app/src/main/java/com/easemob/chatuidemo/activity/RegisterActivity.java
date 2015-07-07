@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.easemob.EMError;
 import com.easemob.chat.EMChatManager;
 import com.ufo.judicature.Entity.ServiceResult;
-import com.ufo.judicature.Entity.SignUpEntity;
 import com.ufo.judicature.Entity.UserInfoEntity;
 import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
@@ -94,14 +93,15 @@ public class RegisterActivity extends BaseActivity {
 								Api.signup(RegisterActivity.this, username, pwd, new NetUtils.NetCallBack<ServiceResult>() {
 									@Override
 									public void success(ServiceResult rspData) {
-
+										Toast.makeText(getApplicationContext(), ((UserInfoEntity)rspData).getMsg(), Toast.LENGTH_SHORT).show();
 									}
 
 									@Override
 									public void failed(String msg) {
+										Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 									}
-								}, SignUpEntity.class);
-								Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
+								}, UserInfoEntity.class);
+//								Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
 								finish();
 							}
 						});

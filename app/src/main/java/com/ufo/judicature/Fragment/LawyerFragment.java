@@ -1,251 +1,218 @@
 package com.ufo.judicature.Fragment;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-
-import com.easemob.chatuidemo.activity.LawyerActivity;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.easemob.chatuidemo.activity.ChatActivity;
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.ufo.judicature.Entity.LawyersEntity;
 import com.ufo.judicature.Entity.ServiceResult;
-import com.ufo.judicature.Entity.UserInfoEntity;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.Widget.Toast;
 
-import com.easemob.EMCallBack;
-import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMGroupManager;
-import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
-import com.easemob.chatuidemo.activity.ChatMainActivity;
-import com.easemob.chatuidemo.activity.RegisterActivity;
-import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
-import com.easemob.chatuidemo.utils.CommonUtils;
 import com.ufo.judicature.Base.BaseFragment;
-import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 律师在线
  */
 public class LawyerFragment extends BaseFragment {
 
-    private static final String TAG = "LoginActivity";
-    public static final int REQUEST_CODE_SETNICK = 1;
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-
-    private boolean progressShow;
-    private boolean autoLogin = false;
-
-    private String currentUsername;
-    private String currentPassword;
+    private ExpandableListView listView;
+    private MyExpandableListViewAdapter adapter;
+    private ArrayList<String> group_list = new ArrayList<>();
+    private ArrayList<ArrayList<User>> item_list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_login, container, false);
+        View v = inflater.inflate(R.layout.activity_lawyer_list, container, false);
 
-        // 如果用户名密码都有，直接进入主页面
-        if (DemoHXSDKHelper.getInstance().isLogined()) {
-            autoLogin = true;
-            startActivity(new Intent(mActivity, LawyerActivity.class));
-        }
-
-        usernameEditText = (EditText) v.findViewById(R.id.username);
-        passwordEditText = (EditText) v.findViewById(R.id.password);
-
-        // 如果用户名改变，清空密码
-        usernameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                passwordEditText.setText(null);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        ((Button)v.findViewById(R.id.btn_register)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                register();
-            }
-        });
-        ((Button)v.findViewById(R.id.btn_login)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-        if (JudiApplication.getInstance().getUserName() != null) {
-            usernameEditText.setText(JudiApplication.getInstance().getUserName());
-        }
+        listView = (ExpandableListView) v.findViewById(R.id.list);
+        listView.setGroupIndicator(null);
+        getContactList();
         return v;
     }
 
+    // 刷新ui
+    public void refresh() {
+        try {
+            // 可能会在子线程中调到这方法
+            mActivity.runOnUiThread(new Runnable() {
+                public void run() {
+                    getContactList();
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
-     * 登录
+     * 获取联系人列表
      */
-    public void login(){
-        if (!CommonUtils.isNetWorkConnected(mActivity)) {
-            Toast.show(mActivity, getString(R.string.network_isnot_available));
-            return;
-        }
-        currentUsername = usernameEditText.getText().toString().trim();
-        currentPassword = passwordEditText.getText().toString().trim();
-
-        if (TextUtils.isEmpty(currentUsername)) {
-            Toast.show(mActivity, getString(R.string.User_name_cannot_be_empty));
-            return;
-        }
-        if (TextUtils.isEmpty(currentPassword)) {
-            Toast.show(mActivity, getString(R.string.Password_cannot_be_empty));
-            return;
-        }
-
-        progressShow = true;
-        final ProgressDialog pd = new ProgressDialog(mActivity);
-        pd.setCanceledOnTouchOutside(false);
-        pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
+    private void getContactList() {
+        Api.getLawyers(mActivity, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
-            public void onCancel(DialogInterface dialog) {
-                progressShow = false;
-            }
-        });
-        pd.setMessage(getString(R.string.Is_landing));
-        pd.show();
+            public void success(ServiceResult rspData) {
+                LawyersEntity lawyersEntity = (LawyersEntity) rspData;
+                ArrayList<LawyersEntity.LawyerGroup> lawyerGroups = lawyersEntity.getData();
 
-        final long start = System.currentTimeMillis();
-        // 调用sdk登陆方法登陆聊天服务器
-        EMChatManager.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                if (!progressShow) {
-                    return;
-                }
-                // 登陆成功，保存用户名密码
-                JudiApplication.getInstance().setUserName(currentUsername);
-                JudiApplication.getInstance().setPassword(currentPassword);
-
-                try {
-                    // ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
-                    // ** manually load all local groups and
-                    EMGroupManager.getInstance().loadAllGroups();
-                    EMChatManager.getInstance().loadAllConversations();
-                    // 处理好友和群组
-                    initializeContacts();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    // 取好友或者群聊失败，不让进入主页面
-                    mActivity.runOnUiThread(new Runnable() {
-                        public void run() {
-                            pd.dismiss();
-                            JudiApplication.getInstance().logout(null);
-                            Toast.show(mActivity, getString(R.string.login_failure_failed));
-                        }
-                    });
-                    return;
-                }
-                // 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
-                boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(
-                        JudiApplication.currentUserNick.trim());
-                if (!updatenick) {
-                    Log.e("LoginActivity", "update current user nick fail");
-                }
-                if (!mActivity.isFinishing() && pd.isShowing()) {
-                    pd.dismiss();
-                }
-                // 进入主页面
-                Intent intent = new Intent(mActivity,
-                        LawyerActivity.class);
-                startActivity(intent);
-
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-            }
-
-            @Override
-            public void onError(final int code, final String message) {
-                if (!progressShow) {
-                    return;
-                }
-                mActivity.runOnUiThread(new Runnable() {
-                    public void run() {
-                        pd.dismiss();
-                        Toast.show(mActivity, getString(R.string.Login_failed) + message);
+                for (LawyersEntity.LawyerGroup lawyerGroup : lawyerGroups) {
+                    group_list.add(lawyerGroup.getName());
+                    ArrayList<User> users = new ArrayList<User>();
+                    for (LawyersEntity.Lawyer lawyer : lawyerGroup.getLawyers()) {
+                        User user = new User();
+                        user.setUsername(lawyer.getAccount());
+                        user.setNick(lawyer.getNickname());
+                        users.add(user);
                     }
-                });
+                    item_list.add(users);
+                }
+
+                adapter = new MyExpandableListViewAdapter(mActivity);
+                listView.setAdapter(adapter);
             }
-        });
+
+            @Override
+            public void failed(String msg) {
+                Toast.show(mActivity, msg);
+            }
+        }, LawyersEntity.class);
     }
 
-    private void initializeContacts() {
-        Map<String, User> userlist = new HashMap<String, User>();
-        // 添加user"申请与通知"
-        User newFriends = new User();
-        newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-        String strChat = getResources().getString(
-                R.string.Application_and_notify);
-        newFriends.setNick(strChat);
+    class MyExpandableListViewAdapter extends BaseExpandableListAdapter {
 
-        userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-        // 添加"群聊"
-        User groupUser = new User();
-        String strGroup = getResources().getString(R.string.group_chat);
-        groupUser.setUsername(Constant.GROUP_USERNAME);
-        groupUser.setNick(strGroup);
-        groupUser.setHeader("");
-        userlist.put(Constant.GROUP_USERNAME, groupUser);
+        private Context context;
 
-        // 添加"Robot"
-        User robotUser = new User();
-        String strRobot = getResources().getString(R.string.robot_chat);
-        robotUser.setUsername(Constant.CHAT_ROBOT);
-        robotUser.setNick(strRobot);
-        robotUser.setHeader("");
-        userlist.put(Constant.CHAT_ROBOT, robotUser);
+        public MyExpandableListViewAdapter(Context context) {
+            this.context = context;
+        }
 
-        // 存入内存
-        JudiApplication.getInstance().setContactList(userlist);
-        // 存入db
-        UserDao dao = new UserDao(mActivity);
-        List<User> users = new ArrayList<User>(userlist.values());
-        dao.saveContactList(users);
+        @Override
+        public int getGroupCount() {
+            return group_list.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return item_list.get(groupPosition).size();
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return group_list.get(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return item_list.get(groupPosition).get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded,
+                                 View convertView, ViewGroup parent) {
+            GroupHolder groupHolder = null;
+            if (convertView == null) {
+                convertView = (View) mActivity.getLayoutInflater().from(context).inflate(
+                        R.layout.agency_item, null);
+                groupHolder = new GroupHolder();
+                groupHolder.txt = (TextView) convertView.findViewById(R.id.tv_services);
+                groupHolder.img = (ImageView) convertView.findViewById(R.id.iv_arrow);
+                convertView.setTag(groupHolder);
+            } else {
+                groupHolder = (GroupHolder) convertView.getTag();
+            }
+            groupHolder.txt.setText(group_list.get(groupPosition));
+            if (isExpanded) {
+                groupHolder.img.setImageResource(R.drawable.arrow_down);
+            } else {
+                groupHolder.img.setImageResource(R.drawable.arrow_right);
+            }
+            return convertView;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, int childPosition,
+                                 boolean isLastChild, View convertView, ViewGroup parent) {
+            final User user = item_list.get(groupPosition).get(
+                    childPosition);
+
+            ItemHolder itemHolder = null;
+            if (convertView == null) {
+                convertView = (View) mActivity.getLayoutInflater().from(context).inflate(
+                        R.layout.agency_item_sub, null);
+                itemHolder = new ItemHolder();
+                itemHolder.ly_service_sub = (LinearLayout) convertView.findViewById(R.id.ly_service_sub);
+                itemHolder.txt = (TextView) convertView.findViewById(R.id.tv_service);
+                convertView.setTag(itemHolder);
+            } else {
+                itemHolder = (ItemHolder) convertView.getTag();
+            }
+
+            itemHolder.ly_service_sub.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!DemoHXSDKHelper.getInstance().isLogined()) {
+                        startActivity(new Intent(mActivity, LoginActivity.class));
+                        return;
+                    }
+
+                    String username = user.getUsername();
+                    Intent intent = new Intent(mActivity, ChatActivity.class);
+                    intent.putExtra("userId", username);
+                    intent.putExtra("userNick", user.getNick());
+                    startActivity(intent);
+                }
+            });
+            itemHolder.txt.setText(user.getNick());
+            return convertView;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
     }
 
-    /**
-     * 注册
-     */
-    public void register() {
-        mActivity.startActivity(new Intent(mActivity, RegisterActivity.class));
+    class GroupHolder {
+        public TextView txt;
+        public ImageView img;
+    }
+
+    class ItemHolder {
+        public LinearLayout ly_service_sub;
+        public TextView txt;
     }
 }

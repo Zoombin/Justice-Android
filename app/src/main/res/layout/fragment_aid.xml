@@ -1,94 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_bg_color" >
+    android:background="@color/app_bg_color"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dip">
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/top_bar_normal_bg"
+        android:gravity="center_vertical">
 
         <TextView
+            android:id="@+id/message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="法律援助"
+            android:textColor="@color/bottom_text_color_normal"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="法律援助范围(民事)"
-            android:textColor="@color/app_text_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="15dip">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;公民对于下列需要代理的事项，因经济困难没有委托代理人的，可以向法律援助机构申请法律援助：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、请求国家赔偿的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、请求给予社会保险待遇或者最低生活保障的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、请求发给抚恤金、救济金的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4、请求给付赡养费、抚养费、扶养费的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5、请求支付劳动报酬或者因劳动关系请求经济补偿、赔偿的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6、因身体遭受严重损害请求赔偿的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7、因遭受家庭暴力、虐待或者遗弃要求变更或者解除收养、监护关系的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;8、因遭受家庭暴力、虐待或者遗弃，对方重婚或者配偶与他人同居的受害方要求离婚的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;9、国家和省规定的其他事项。\n"
-            android:textColor="@color/app_text_gray"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="法律援助范围(民事)"
+                android:textColor="@color/app_text_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="刑事诉讼中有哪些情形可以申请法律援助"
-            android:textColor="@color/app_text_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;公民对于下列需要代理的事项，因经济困难没有委托代理人的，可以向法律援助机构申请法律援助：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、请求国家赔偿的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、请求给予社会保险待遇或者最低生活保障的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、请求发给抚恤金、救济金的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4、请求给付赡养费、抚养费、扶养费的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5、请求支付劳动报酬或者因劳动关系请求经济补偿、赔偿的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6、因身体遭受严重损害请求赔偿的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7、因遭受家庭暴力、虐待或者遗弃要求变更或者解除收养、监护关系的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;8、因遭受家庭暴力、虐待或者遗弃，对方重婚或者配偶与他人同居的受害方要求离婚的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;9、国家和省规定的其他事项。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、犯罪嫌疑人有被侦查机关第一次讯问后或者采取强制措施之日起，因经济困难没有聘请律师的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、公诉案件中的被害人及其法定代理人或者近亲属，自案件移送审查起诉之日起，因经济困难没有委托诉讼代理人的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、自诉案件的自诉人及其法定代理人，自案件被人民法院受理之日起，因经济困难没有委托诉讼代理人的。\n"
-            android:textColor="@color/app_text_gray"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="刑事诉讼中有哪些情形可以申请法律援助"
+                android:textColor="@color/app_text_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="法律援助可认定的经济困难对象"
-            android:textColor="@color/app_text_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、犯罪嫌疑人有被侦查机关第一次讯问后或者采取强制措施之日起，因经济困难没有聘请律师的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、公诉案件中的被害人及其法定代理人或者近亲属，自案件移送审查起诉之日起，因经济困难没有委托诉讼代理人的；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、自诉案件的自诉人及其法定代理人，自案件被人民法院受理之日起，因经济困难没有委托诉讼代理人的。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、农村“五保”对象；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、社会福利机构中由政府供养的人员；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、无固定生活来源的重度残疾人；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4、正在享受最低生活保障待遇的人员；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5、总工会核定的特困职工；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6、依靠抚恤金生活的人员。\n"
-            android:textColor="@color/app_text_gray"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="法律援助可认定的经济困难对象"
+                android:textColor="@color/app_text_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="申请法律援助需提交材料"
-            android:textColor="@color/app_text_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、农村“五保”对象；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、社会福利机构中由政府供养的人员；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、无固定生活来源的重度残疾人；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4、正在享受最低生活保障待遇的人员；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5、总工会核定的特困职工；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6、依靠抚恤金生活的人员。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、居民身份证、户籍证明或暂住证；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、街道（乡镇），民政部门出具的申请人及其家庭成员经济状况证明；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、申请援助事项的基本情况以及有关的案情材料；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4、法律援助中心要求提供的其他材料。\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5、申请人为限制人身自由的，申请人近亲属可以代为申请；申请人为无民事行为能力或者限制民事行为能力人的，应由其法定代理人（监护人）代为申请，并提交代理权资格证明。\n"
-            android:textColor="@color/app_text_gray"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="申请法律援助需提交材料"
+                android:textColor="@color/app_text_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="获得法律援助需要具备些条件"
-            android:textColor="@color/app_text_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、居民身份证、户籍证明或暂住证；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、街道（乡镇），民政部门出具的申请人及其家庭成员经济状况证明；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、申请援助事项的基本情况以及有关的案情材料；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4、法律援助中心要求提供的其他材料。\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5、申请人为限制人身自由的，申请人近亲属可以代为申请；申请人为无民事行为能力或者限制民事行为能力人的，应由其法定代理人（监护人）代为申请，并提交代理权资格证明。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;申请提交法律援助机构后，法律援助将按照以下条件进行审查并决定能否获得法律援助：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、有合理的请求及事实依据；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、请求事项属于法律援助范围；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、因经济困难无能力承担法律服务费用。"
-            android:textColor="@color/app_text_gray"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="获得法律援助需要具备些条件"
+                android:textColor="@color/app_text_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;申请提交法律援助机构后，法律援助将按照以下条件进行审查并决定能否获得法律援助：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、有合理的请求及事实依据；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、请求事项属于法律援助范围；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、因经济困难无能力承担法律服务费用。"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

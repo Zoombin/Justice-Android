@@ -1,5 +1,6 @@
 package com.ufo.judicature.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +9,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.ufo.judicature.Base.BaseFragment;
 import com.ufo.judicature.R;
 
@@ -27,6 +30,7 @@ public class PropagandaFragment extends BaseFragment {
     private PropagandaNewsFragment f1;
     private PropagandaPhotoFragment f2;
     private PropagandaVideoFragment f3;
+    private ImageView iv_user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +58,14 @@ public class PropagandaFragment extends BaseFragment {
                         pager_propaganda.setCurrentItem(2);
                         break;
                 }
+            }
+        });
+
+        iv_user = (ImageView) v.findViewById(R.id.iv_user);
+        iv_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, LoginActivity.class));
             }
         });
 

@@ -22,7 +22,12 @@ import android.widget.Toast;
 
 import com.easemob.EMError;
 import com.easemob.chat.EMChatManager;
+import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.Entity.SignUpEntity;
+import com.ufo.judicature.Entity.UserInfoEntity;
 import com.ufo.judicature.JudiApplication;
+import com.ufo.judicature.Net.Api;
+import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
 import com.easemob.exceptions.EaseMobException;
 
@@ -86,6 +91,16 @@ public class RegisterActivity extends BaseActivity {
 									pd.dismiss();
 								// 保存用户名
 								JudiApplication.getInstance().setUserName(username);
+								Api.signup(RegisterActivity.this, username, pwd, new NetUtils.NetCallBack<ServiceResult>() {
+									@Override
+									public void success(ServiceResult rspData) {
+
+									}
+
+									@Override
+									public void failed(String msg) {
+									}
+								}, SignUpEntity.class);
 								Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
 								finish();
 							}

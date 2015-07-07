@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.easemob.chatuidemo.activity.LawyerActivity;
 import com.ufo.judicature.Entity.LawyersEntity;
 import com.ufo.judicature.Entity.ServiceResult;
 import com.ufo.judicature.Entity.UserInfoEntity;
@@ -60,14 +61,12 @@ public class LawyerFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        initData();
-
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         // 如果用户名密码都有，直接进入主页面
         if (DemoHXSDKHelper.getInstance().isLogined()) {
             autoLogin = true;
-            startActivity(new Intent(mActivity, ChatMainActivity.class));
+            startActivity(new Intent(mActivity, LawyerActivity.class));
         }
 
         usernameEditText = (EditText) v.findViewById(R.id.username);
@@ -107,21 +106,6 @@ public class LawyerFragment extends BaseFragment {
             usernameEditText.setText(JudiApplication.getInstance().getUserName());
         }
         return v;
-    }
-
-    private void initData() {
-//        Api.getLawyers(mActivity, new NetUtils.NetCallBack<ServiceResult>() {
-//            @Override
-//            public void success(ServiceResult rspData) {
-//                LawyersEntity lawyersEntity = (LawyersEntity) rspData;
-//                lawyersEntity.getData();
-//            }
-//
-//            @Override
-//            public void failed(String msg) {
-//                Toast.show(mActivity, msg);
-//            }
-//        }, LawyersEntity.class);
     }
 
     /**
@@ -200,7 +184,7 @@ public class LawyerFragment extends BaseFragment {
                 }
                 // 进入主页面
                 Intent intent = new Intent(mActivity,
-                        ChatMainActivity.class);
+                        LawyerActivity.class);
                 startActivity(intent);
 
             }

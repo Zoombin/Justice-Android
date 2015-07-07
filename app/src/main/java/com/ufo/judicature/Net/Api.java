@@ -136,4 +136,16 @@ public class Api {
     public static void getLawyers(Context context, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=getLawyers", "正在获取律师列表。。。", netCallBack, rspCls);
     }
+
+    /**
+     * 注册
+     * @param context
+     * @param account
+     * @param password
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void signup(Context context, String account, String password, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=signup" + "&account=" + account + "&password=" + password, null, netCallBack, rspCls);
+    }
 }

@@ -380,6 +380,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		if (chatType == CHATTYPE_SINGLE) { // 单聊
 			toChatUsername = getIntent().getStringExtra("userId");
+			String usernick = getIntent().getStringExtra("userNick");
 			Map<String,RobotUser> robotMap=((DemoHXSDKHelper)HXSDKHelper.getInstance()).getRobotList();
 			if(robotMap!=null&&robotMap.containsKey(toChatUsername)){
 				isRobot = true;
@@ -387,10 +388,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				if(!TextUtils.isEmpty(nick)){
 					((TextView) findViewById(R.id.name)).setText(nick);
 				}else{
-					((TextView) findViewById(R.id.name)).setText(toChatUsername);
+					((TextView) findViewById(R.id.name)).setText(usernick);
 				}
 			}else{
-				((TextView) findViewById(R.id.name)).setText(toChatUsername);
+				((TextView) findViewById(R.id.name)).setText(usernick);
 			}
 		} else {
 			// 群聊

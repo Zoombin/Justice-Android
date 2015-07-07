@@ -25,6 +25,7 @@ import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
+import com.ufo.judicature.Utils.Config;
 import com.ufo.judicature.Widget.Toast;
 import com.ufo.judicature.Widget.viewpager.RecyclingPagerAdapter;
 
@@ -365,6 +366,9 @@ public class ExamActivity extends BaseActivity {
                 examination_id = questionInfos.get(0).getExamination_id();
                 if (questionInfos != null) {
                     scores = new Integer[questionInfos.size()];
+                    for(int i=0; i<questionInfos.size(); i++) {
+                        scores[i] = 0;
+                    }
                     adapter.addQuestionList(questionInfos);
                 } else {
                     Toast.show(self, "无试卷信息！");
@@ -384,7 +388,7 @@ public class ExamActivity extends BaseActivity {
         for (int s : scores) {
             s1 += s;
         }
-        Api.addMyScore(self, JudiApplication.getInstance().getUserName(), Integer.toString(s1), examination_id, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.addMyScore(self, Config.getUserId(), Integer.toString(s1), examination_id, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 ExamEntity examEntity = (ExamEntity) rspData;
@@ -395,6 +399,7 @@ public class ExamActivity extends BaseActivity {
             @Override
             public void failed(String msg) {
                 Toast.show(self, msg);
+                finish();
             }
         }, ExamEntity.class);
     }

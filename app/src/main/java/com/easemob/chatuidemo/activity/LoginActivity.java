@@ -36,11 +36,17 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.ufo.judicature.Entity.LoginEntity;
+import com.ufo.judicature.Entity.ServiceResult;
+import com.ufo.judicature.Entity.UserInfoEntity;
 import com.ufo.judicature.JudiApplication;
+import com.ufo.judicature.Net.Api;
+import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
+import com.ufo.judicature.Utils.Config;
 
 /**
  * 登陆页面
@@ -170,12 +176,25 @@ public class LoginActivity extends BaseActivity {
 				if (!LoginActivity.this.isFinishing() && pd.isShowing()) {
 					pd.dismiss();
 				}
-//				// 进入主页面
-//				Intent intent = new Intent(LoginActivity.this,
-//						MainActivity.class);
-//				startActivity(intent);
-				
-				finish();
+
+				runOnUiThread(new Runnable() {
+					public void run() {
+						Api.signin(LoginActivity.this, currentUsername, currentPassword, new NetUtils.NetCallBack<ServiceResult>() {
+							@Override
+							public void success(ServiceResult rspData) {
+								Toast.makeText(getApplicationContext(), ((LoginEntity) rspData).getMsg(), Toast.LENGTH_SHORT).show();
+
+								Config.setUserId(((LoginEntity) rspData).getData().getId());
+								finish();
+							}
+
+							@Override
+							public void failed(String msg) {
+								Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+							}
+						}, LoginEntity.class);
+					}
+				});
 			}
 
 			@Override

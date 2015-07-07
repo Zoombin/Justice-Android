@@ -28,6 +28,8 @@ public class Config {
 	// 第一次启动
 	private static String FIRST_START = "FIRST_START";
 
+	private static String USER_ID = "USER_ID";
+
 	public static SharedPreferences UserInfoPreferences = JudiApplication.getContext().getSharedPreferences(USER_INFO, 0);
 
 	public static boolean isFirst() {
@@ -36,6 +38,14 @@ public class Config {
 
 	public static void setFirst(boolean isFirst) {
 		UserInfoPreferences.edit().putBoolean(FIRST_START, isFirst).commit();
+	}
+
+	public static String getUserId() {
+		return UserInfoPreferences.getString(USER_ID, "");
+	}
+
+	public static void setUserId(String userid) {
+		UserInfoPreferences.edit().putString(USER_ID, userid).commit();
 	}
 
 	/**

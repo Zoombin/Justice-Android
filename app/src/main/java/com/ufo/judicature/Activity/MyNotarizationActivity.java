@@ -13,6 +13,7 @@ import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
+import com.ufo.judicature.Utils.Config;
 import com.ufo.judicature.Widget.Toast;
 
 /**
@@ -44,7 +45,7 @@ public class MyNotarizationActivity extends BaseActivity {
     }
 
     private void initData() {
-        Api.getMyReservation(self, JudiApplication.getInstance().getUserName(), new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getMyReservation(self, Config.getUserId(), new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 MyNortarizationEntity myNortarizationEntity = (MyNortarizationEntity) rspData;

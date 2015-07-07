@@ -148,4 +148,16 @@ public class Api {
     public static void signup(Context context, String account, String password, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=signup" + "&account=" + account + "&password=" + password, null, netCallBack, rspCls);
     }
+
+    /**
+     * 登录
+     * @param context
+     * @param account
+     * @param password
+     * @param netCallBack
+     * @param rspCls
+     */
+    public static void signin(Context context, String account, String password, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=signin" + "&account=" + account + "&password=" + password, null, netCallBack, rspCls);
+    }
 }

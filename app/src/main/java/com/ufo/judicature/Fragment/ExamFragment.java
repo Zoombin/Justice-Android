@@ -18,6 +18,7 @@ import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
+import com.ufo.judicature.Utils.Config;
 import com.ufo.judicature.Widget.Toast;
 
 /**
@@ -48,7 +49,7 @@ public class ExamFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         if (DemoHXSDKHelper.getInstance().isLogined()) {
-            Api.getUserInfo(mActivity, JudiApplication.getInstance().getUserName(), new NetUtils.NetCallBack<ServiceResult>() {
+            Api.getUserInfo(mActivity, Config.getUserId(), new NetUtils.NetCallBack<ServiceResult>() {
                 @Override
                 public void success(ServiceResult rspData) {
                     UserInfoEntity entity = (UserInfoEntity) rspData;

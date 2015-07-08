@@ -19,6 +19,16 @@
             android:text="律师在线"
             android:textColor="@color/bottom_text_color_normal"
             android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="向左滑动"
+            android:layout_marginRight="15dip"
+            android:textColor="@color/bottom_text_color_normal"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <FrameLayout

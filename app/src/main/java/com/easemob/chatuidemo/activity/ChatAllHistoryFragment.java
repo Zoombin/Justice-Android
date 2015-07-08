@@ -38,6 +38,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMConversation.EMConversationType;
 import com.easemob.chatuidemo.Constant;
+import com.ufo.judicature.Activity.MainActivity;
 import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.R;
 import com.easemob.chatuidemo.adapter.ChatAllHistoryAdapter;
@@ -191,8 +192,8 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 		adapter.remove(tobeDeleteCons);
 		adapter.notifyDataSetChanged();
 
-		// 更新消息未读数
-		((ChatMainActivity) getActivity()).updateUnreadLabel();
+//		// 更新消息未读数
+//		((ChatMainActivity) getActivity()).updateUnreadLabel();
 		
 		return handled ? true : super.onContextItemSelected(item);
 	}
@@ -276,20 +277,20 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!hidden && ! ((ChatMainActivity)getActivity()).isConflict) {
+		if (!hidden) {
 			refresh();
 		}
 	}
 
-	@Override
-    public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-        if(((ChatMainActivity)getActivity()).isConflict){
-        	outState.putBoolean("isConflict", true);
-        }else if(((ChatMainActivity)getActivity()).getCurrentAccountRemoved()){
-        	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
-        }
-    }
+//	@Override
+//    public void onSaveInstanceState(Bundle outState) {
+//		super.onSaveInstanceState(outState);
+//        if(((ChatMainActivity)getActivity()).isConflict){
+//        	outState.putBoolean("isConflict", true);
+//        }else if(((ChatMainActivity)getActivity()).getCurrentAccountRemoved()){
+//        	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
+//        }
+//    }
 
     @Override
     public void onClick(View v) {        

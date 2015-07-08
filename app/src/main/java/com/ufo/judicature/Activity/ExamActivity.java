@@ -213,16 +213,16 @@ public class ExamActivity extends BaseActivity {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         String aw = "";
-                        if (holder.rb_single_a.isChecked()) {
+                        if (holder.rb_multi_a.isChecked()) {
                             aw += "a,";
                         }
-                        if (holder.rb_single_b.isChecked()) {
+                        if (holder.rb_multi_b.isChecked()) {
                             aw += "b,";
                         }
-                        if (holder.rb_single_c.isChecked()) {
+                        if (holder.rb_multi_c.isChecked()) {
                             aw += "c,";
                         }
-                        if (holder.rb_single_d.isChecked()) {
+                        if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
                         }
                         aw = aw.substring(0, aw.length() - 1);
@@ -238,16 +238,16 @@ public class ExamActivity extends BaseActivity {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         String aw = "";
-                        if (holder.rb_single_a.isChecked()) {
+                        if (holder.rb_multi_a.isChecked()) {
                             aw += "a,";
                         }
-                        if (holder.rb_single_b.isChecked()) {
+                        if (holder.rb_multi_b.isChecked()) {
                             aw += "b,";
                         }
-                        if (holder.rb_single_c.isChecked()) {
+                        if (holder.rb_multi_c.isChecked()) {
                             aw += "c,";
                         }
-                        if (holder.rb_single_d.isChecked()) {
+                        if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
                         }
                         aw = aw.substring(0, aw.length() - 1);
@@ -263,16 +263,16 @@ public class ExamActivity extends BaseActivity {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         String aw = "";
-                        if (holder.rb_single_a.isChecked()) {
+                        if (holder.rb_multi_a.isChecked()) {
                             aw += "a,";
                         }
-                        if (holder.rb_single_b.isChecked()) {
+                        if (holder.rb_multi_b.isChecked()) {
                             aw += "b,";
                         }
-                        if (holder.rb_single_c.isChecked()) {
+                        if (holder.rb_multi_c.isChecked()) {
                             aw += "c,";
                         }
-                        if (holder.rb_single_d.isChecked()) {
+                        if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
                         }
                         aw = aw.substring(0, aw.length() - 1);
@@ -288,16 +288,16 @@ public class ExamActivity extends BaseActivity {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         String aw = "";
-                        if (holder.rb_single_a.isChecked()) {
+                        if (holder.rb_multi_a.isChecked()) {
                             aw += "a,";
                         }
-                        if (holder.rb_single_b.isChecked()) {
+                        if (holder.rb_multi_b.isChecked()) {
                             aw += "b,";
                         }
-                        if (holder.rb_single_c.isChecked()) {
+                        if (holder.rb_multi_c.isChecked()) {
                             aw += "c,";
                         }
-                        if (holder.rb_single_d.isChecked()) {
+                        if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
                         }
                         aw = aw.substring(0, aw.length() - 1);

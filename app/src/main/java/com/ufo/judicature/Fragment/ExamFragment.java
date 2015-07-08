@@ -76,7 +76,7 @@ public class ExamFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_integration:
-                Toast.show(mActivity, "积分兑换功能还未上线，敬请期待。。。");
+                Toast.show(mActivity, "积分兑换功能还未上线，敬请期待！");
                 break;
         }
     }

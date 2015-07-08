@@ -5,7 +5,7 @@ android {
         relese {
             keyAlias 'ufo'
             keyPassword 'ufo123123'
-            storeFile file('D:/Users/Administrator/AndroidStudioProjects/Justice-Android/key.jks')
+            storeFile file('C:/Users/daiye/AndroidStudioProjects/Justice-Android/key.jks')
             storePassword 'ufo123123'
         }
     }

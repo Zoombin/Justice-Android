@@ -35,6 +35,7 @@ import android.widget.TextView.BufferType;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatRoom;
+import com.easemob.chat.EMContact;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
@@ -116,17 +117,18 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			} else if (username.equals(Constant.NEW_FRIENDS_USERNAME)) {
 				holder.name.setText("申请与通知");
 			}
-			Map<String,RobotUser> robotMap=((DemoHXSDKHelper)HXSDKHelper.getInstance()).getRobotList();
-			if(robotMap!=null&&robotMap.containsKey(username)){
-				String nick = robotMap.get(username).getNick();
-				if(!TextUtils.isEmpty(nick)){
-					holder.name.setText(nick);
-				}else{
-					holder.name.setText(username);
-				}
-			}else{
-				holder.name.setText(username);
-			}
+//			Map<String,RobotUser> robotMap=((DemoHXSDKHelper)HXSDKHelper.getInstance()).getRobotList();
+//			if(robotMap!=null&&robotMap.containsKey(username)){
+//				String nick = robotMap.get(username).getNick();
+//				if(!TextUtils.isEmpty(nick)){
+//					holder.name.setText(nick);
+//				}else{
+//					holder.name.setText(username);
+//				}
+//			}else{
+//				holder.name.setText(username);
+//			}
+			holder.name.setText(new EMContact(username).getNick());
 		}
 
 		if (conversation.getUnreadMsgCount() > 0) {

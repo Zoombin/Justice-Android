@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.activity.LoginActivity;
+import com.ufo.judicature.Activity.PersonalActivity;
 import com.ufo.judicature.Base.BaseFragment;
 import com.ufo.judicature.R;
 
@@ -65,7 +67,11 @@ public class PropagandaFragment extends BaseFragment {
         iv_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity, LoginActivity.class));
+                if (DemoHXSDKHelper.getInstance().isLogined()) {
+                    startActivity(new Intent(mActivity, PersonalActivity.class));
+                } else {
+                    startActivity(new Intent(mActivity, LoginActivity.class));
+                }
             }
         });
 

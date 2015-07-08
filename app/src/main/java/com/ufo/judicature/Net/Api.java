@@ -1,8 +1,11 @@
 package com.ufo.judicature.Net;
 
 import android.content.Context;
+import android.util.Xml;
 
 import com.ufo.judicature.Entity.ServiceResult;
+
+import java.net.URLEncoder;
 
 public class Api {
 
@@ -80,7 +83,7 @@ public class Api {
      * @param rspCls
      */
     public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, String date, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=reserve&user_id=" + userid + "&name=" + name + "&phone=" + phone + "&identityNumber=" + identityNumber + "&reserve_date=" + date, null, netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=reserve&user_id=" + userid + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date, null, netCallBack, rspCls);
     }
 
     /**
@@ -159,5 +162,9 @@ public class Api {
      */
     public static void signin(Context context, String account, String password, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
         NetUtils.getValue(context, "?action=signin" + "&account=" + account + "&password=" + password, null, netCallBack, rspCls);
+    }
+
+    public static void advice(Context context, String content, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=advice" + "&content=" + URLEncoder.encode(content) + "&user_id=" + userid, null, netCallBack, rspCls);
     }
 }

@@ -104,6 +104,18 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
 
+        <activity
+            android:name="com.ufo.judicature.Activity.PersonalActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
+
+        <activity
+            android:name="com.ufo.judicature.Activity.FeedbackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
+
         <!-- 开屏页 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.SplashActivity"

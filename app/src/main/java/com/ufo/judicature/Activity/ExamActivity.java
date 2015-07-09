@@ -1,9 +1,9 @@
 package com.ufo.judicature.Activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +15,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ufo.judicature.Base.BaseActivity;
 import com.ufo.judicature.Entity.ExamEntity;
-import com.ufo.judicature.Entity.NewsEntity;
 import com.ufo.judicature.Entity.QuestionEntity;
 import com.ufo.judicature.Entity.ServiceResult;
-import com.ufo.judicature.JudiApplication;
 import com.ufo.judicature.Net.Api;
 import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
@@ -37,6 +34,7 @@ import java.util.ArrayList;
  */
 public class ExamActivity extends BaseActivity {
 
+    private TextView tv_title;
     private TextView tv_commit;
     private ViewPager pager_questions;
     private QuestionViewPagerAdapter adapter;
@@ -68,10 +66,27 @@ public class ExamActivity extends BaseActivity {
                 upLoad();
             }
         });
+        tv_title = (TextView) findViewById(R.id.tv_title);
         pager_questions = (ViewPager) findViewById(R.id.pager_questions);
         pager_questions.setOffscreenPageLimit(1000);
         adapter = new QuestionViewPagerAdapter(this);
         pager_questions.setAdapter(adapter);
+        pager_questions.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tv_title.setText("第" + (position + 1) + "/" +  scores.length + "题");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public class QuestionViewPagerAdapter extends RecyclingPagerAdapter {
@@ -96,6 +111,8 @@ public class ExamActivity extends BaseActivity {
         public int getCount() {
             return questionInfos.size();
         }
+
+
 
         @Override
         public View getView(final int position, View convertView, ViewGroup container) {
@@ -130,9 +147,10 @@ public class ExamActivity extends BaseActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.tv_question.setText((position + 1) + ". " + questionInfo.getQuestion());
             String type = questionInfo.getType();
+            String typename = "";
             if (type.equals("1")) {
+                typename = "单选题";
                 holder.ly_singleselect.setVisibility(View.VISIBLE);
                 holder.ly_multiselect.setVisibility(View.GONE);
                 holder.ly_judge.setVisibility(View.GONE);
@@ -143,6 +161,7 @@ public class ExamActivity extends BaseActivity {
                         String aw = "";
                         if (isChecked) {
                             aw = "a";
+                            answers[position] = "a";
                         } else {
                             return;
                         }
@@ -160,6 +179,7 @@ public class ExamActivity extends BaseActivity {
                         String aw = "";
                         if (isChecked) {
                             aw = "b";
+                            answers[position] = "b";
                         } else {
                             return;
                         }
@@ -177,6 +197,7 @@ public class ExamActivity extends BaseActivity {
                         String aw = "";
                         if (isChecked) {
                             aw = "c";
+                            answers[position] = "c";
                         } else {
                             return;
                         }
@@ -194,6 +215,7 @@ public class ExamActivity extends BaseActivity {
                         String aw = "";
                         if (isChecked) {
                             aw = "d";
+                            answers[position] = "d";
                         } else {
                             return;
                         }
@@ -205,6 +227,7 @@ public class ExamActivity extends BaseActivity {
                     }
                 });
             } else if (type.equals("2")) {
+                typename = "多选题";
                 holder.ly_singleselect.setVisibility(View.GONE);
                 holder.ly_multiselect.setVisibility(View.VISIBLE);
                 holder.ly_judge.setVisibility(View.GONE);
@@ -224,6 +247,10 @@ public class ExamActivity extends BaseActivity {
                         }
                         if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
+                        }
+                        answers[position] = aw;
+                        if (TextUtils.isEmpty(aw)) {
+                            return;
                         }
                         aw = aw.substring(0, aw.length() - 1);
                         if (aw.equals(questionInfo.getAnswer())) {
@@ -250,6 +277,10 @@ public class ExamActivity extends BaseActivity {
                         if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
                         }
+                        answers[position] = aw;
+                        if (TextUtils.isEmpty(aw)) {
+                            return;
+                        }
                         aw = aw.substring(0, aw.length() - 1);
                         if (aw.equals(questionInfo.getAnswer())) {
                             scores[position] = onesource;
@@ -274,6 +305,10 @@ public class ExamActivity extends BaseActivity {
                         }
                         if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
+                        }
+                        answers[position] = aw;
+                        if (TextUtils.isEmpty(aw)) {
+                            return;
                         }
                         aw = aw.substring(0, aw.length() - 1);
                         if (aw.equals(questionInfo.getAnswer())) {
@@ -300,6 +335,10 @@ public class ExamActivity extends BaseActivity {
                         if (holder.rb_multi_d.isChecked()) {
                             aw += "d,";
                         }
+                        answers[position] = aw;
+                        if (TextUtils.isEmpty(aw)) {
+                            return;
+                        }
                         aw = aw.substring(0, aw.length() - 1);
                         if (aw.equals(questionInfo.getAnswer())) {
                             scores[position] = onesource;
@@ -309,15 +348,20 @@ public class ExamActivity extends BaseActivity {
                     }
                 });
             } else if (type.equals("0")) {
+                typename = "判断题";
                 holder.ly_singleselect.setVisibility(View.GONE);
                 holder.ly_multiselect.setVisibility(View.GONE);
                 holder.ly_judge.setVisibility(View.VISIBLE);
                 holder.rb_yes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
                         if (questionInfo.getYes_or_no().equals("1")) {
+                            aw = "1";
                             scores[position] = onesource;
+                            answers[position] = "1";
                         } else {
+                            aw = "0";
                             scores[position] = 0;
                         }
                     }
@@ -325,15 +369,20 @@ public class ExamActivity extends BaseActivity {
                 holder.rb_no.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String aw = "";
                         if (questionInfo.getYes_or_no().equals("0")) {
+                            aw = "1";
                             scores[position] = onesource;
+                            answers[position] = "2";
                         } else {
+                            aw = "0";
                             scores[position] = 0;
                         }
                     }
                 });
             }
 
+            holder.tv_question.setText("(" + typename + ") " + (position + 1) + ". " + questionInfo.getQuestion());
             return convertView;
         }
 
@@ -357,6 +406,8 @@ public class ExamActivity extends BaseActivity {
         }
     }
 
+    String[] answers;
+
     private void initData() {
         Api.getQuestion(self, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
@@ -369,7 +420,14 @@ public class ExamActivity extends BaseActivity {
                     for(int i=0; i<questionInfos.size(); i++) {
                         scores[i] = 0;
                     }
+
+                    answers = new String[questionInfos.size()];
+                    for(int i=0; i<questionInfos.size(); i++) {
+                        answers[i] = "";
+                    }
+
                     adapter.addQuestionList(questionInfos);
+                    tv_title.setText("第1/" + scores.length + "题");
                 } else {
                     Toast.show(self, "无试卷信息！");
                     finish();
@@ -384,6 +442,13 @@ public class ExamActivity extends BaseActivity {
     }
 
     private void upLoad() {
+        for (int i=0; i<answers.length; i++) {
+            if (TextUtils.isEmpty(answers[i])) {
+                Toast.show(self, "第" + (i+1) + "题未作答，无法提交！");
+                return;
+            }
+        }
+
         int s1 = 0;
         for (int s : scores) {
             s1 += s;

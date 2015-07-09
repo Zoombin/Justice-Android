@@ -69,7 +69,7 @@ public class Api {
      * @param rspCls
      */
     public static void getMyReservation(Context context, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=getMyReservation&user_id=" + userid, null, netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=getMyReservation&user_id=" + userid, "正在获得预约信息！", netCallBack, rspCls);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Api {
      * @param rspCls
      */
     public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, String date, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=reserve&user_id=" + userid + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date, null, netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=reserve&user_id=" + userid + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date, "正在提交！", netCallBack, rspCls);
     }
 
     /**

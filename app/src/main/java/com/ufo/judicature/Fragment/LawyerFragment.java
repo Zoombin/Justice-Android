@@ -56,6 +56,23 @@ public class LawyerFragment extends BaseFragment {
         fragmentlist.add(lawyerListFragment);
         fragmentlist.add(chatAllHistoryFragment);
 
+        pager_lawyer.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1)
+                    chatAllHistoryFragment.refresh();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         String[] s = new String[2];
         s[0] = "律师";
         s[1] = "会话";

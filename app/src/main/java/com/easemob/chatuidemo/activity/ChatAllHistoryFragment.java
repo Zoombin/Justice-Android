@@ -80,8 +80,7 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 		adapter = new ChatAllHistoryAdapter(getActivity(), 1, conversationList);
 		// 设置adapter
 		listView.setAdapter(adapter);
-				
-		
+
 		final String st2 = getResources().getString(R.string.Cant_chat_with_yourself);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 

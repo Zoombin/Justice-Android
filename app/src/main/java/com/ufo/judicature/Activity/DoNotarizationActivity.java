@@ -24,6 +24,8 @@ import com.ufo.judicature.Utils.Config;
 import com.ufo.judicature.Widget.Toast;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 我要预约
@@ -110,14 +112,28 @@ public class DoNotarizationActivity extends BaseActivity {
             Toast.show(self, "请输入姓名！");
             return;
         }
+        if (!isChineseName(name)) {
+            Toast.show(self, "请输入正确的姓名！");
+            return;
+        }
+
         String idcard = tv_nortarization_idcard.getText().toString().trim();
         if (TextUtils.isEmpty(idcard)) {
             Toast.show(self, "请输入身份证号！");
             return;
         }
+        if (!isIdCard(idcard)) {
+            Toast.show(self, "请输入正确的身份证号！");
+            return;
+        }
+
         String phone = tv_nortarization_phone.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
             Toast.show(self, "请输入手机号码！");
+            return;
+        }
+        if (!isPhoneNumber(phone)) {
+            Toast.show(self, "请输入正确的手机号码！");
             return;
         }
 
@@ -134,5 +150,39 @@ public class DoNotarizationActivity extends BaseActivity {
                 Toast.show(self, msg);
             }
         }, DoNortarizationEntity.class);
+    }
+
+    public boolean isChineseName(String name) {
+        Pattern pattern = Pattern.compile("^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]){2,5}$");
+        Matcher matcher = pattern.matcher(name);
+        if (matcher.find()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isIdCard(String idcard) {
+        //定义判别用户身份证号的正则表达式（要么是15位，要么是18位，最后一位可以为字母）
+        Pattern idNumPattern = Pattern.compile("(\\d{14}[0-9a-zA-Z])|(\\d{17}[0-9a-zA-Z])");
+        //通过Pattern获得Matcher
+        Matcher idNumMatcher = idNumPattern.matcher(idcard);
+        //判断用户输入是否为身份证号
+        if (idNumMatcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isPhoneNumber(String phone) {
+        if (phone.length() != 11) {
+            return false;
+        }
+        try {
+            Long.parseLong(phone);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

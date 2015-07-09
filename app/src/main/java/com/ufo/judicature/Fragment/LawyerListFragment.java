@@ -34,7 +34,7 @@ public class LawyerListFragment extends BaseFragment {
     private ExpandableListView listView;
     private MyExpandableListViewAdapter adapter;
     private ArrayList<String> group_list = new ArrayList<>();
-    private ArrayList<ArrayList<User>> item_list = new ArrayList<>();
+    public static ArrayList<ArrayList<User>> item_list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +87,8 @@ public class LawyerListFragment extends BaseFragment {
 
                 adapter = new MyExpandableListViewAdapter(mActivity);
                 listView.setAdapter(adapter);
+
+
             }
 
             @Override

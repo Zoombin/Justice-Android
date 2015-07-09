@@ -16,6 +16,8 @@ import com.ufo.judicature.R;
 import com.ufo.judicature.Utils.Config;
 import com.ufo.judicature.Widget.Toast;
 
+import java.util.List;
+
 /**
  * 我的预约
  */
@@ -49,12 +51,16 @@ public class MyNotarizationActivity extends BaseActivity {
             @Override
             public void success(ServiceResult rspData) {
                 MyNortarizationEntity myNortarizationEntity = (MyNortarizationEntity) rspData;
-                MyNortarizationEntity.NortarizationInfo nortarizationInfo = myNortarizationEntity.getData();
-                if (nortarizationInfo != null) {
-                    tv_mynotarization.setText("姓名：" + nortarizationInfo.getName() + "\n" +
-                            "身份证：" + nortarizationInfo.getIdentity_number() + "\n" +
-                            "预约时间：" + nortarizationInfo.getPhone() + "\n" +
-                            "手机号码：" + nortarizationInfo.getReserve_date());
+                List<MyNortarizationEntity.NortarizationInfo> nortarizationInfos = myNortarizationEntity.getData();
+                if (nortarizationInfos != null) {
+                    String info = "";
+                    for (MyNortarizationEntity.NortarizationInfo nortarizationInfo : nortarizationInfos) {
+                        info += "姓名：" + nortarizationInfo.getName() + "\n" +
+                                "身份证：" + nortarizationInfo.getIdentity_number() + "\n" +
+                                "手机号码：" + nortarizationInfo.getPhone() + "\n" +
+                                "预约时间：" + nortarizationInfo.getReserve_date()+ "\n";
+                    }
+                    tv_mynotarization.setText(info);
                 }
             }
 

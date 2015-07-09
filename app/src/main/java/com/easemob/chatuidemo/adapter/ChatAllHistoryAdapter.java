@@ -45,6 +45,8 @@ import com.easemob.chat.TextMessageBody;
 import com.easemob.chat.EMConversation.EMConversationType;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.domain.User;
+import com.ufo.judicature.Fragment.LawyerListFragment;
 import com.ufo.judicature.R;
 import com.easemob.chatuidemo.domain.RobotUser;
 import com.easemob.chatuidemo.utils.DateUtils;
@@ -128,7 +130,19 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 //			}else{
 //				holder.name.setText(username);
 //			}
-			holder.name.setText(new EMContact(username).getNick());
+			ArrayList<ArrayList<User>> userlist = LawyerListFragment.item_list;
+			if (userlist != null && userlist.size() > 0) {
+				for (ArrayList<User> users : userlist) {
+					for (User user : users) {
+						if (user.getUsername().equals(username)) {
+							holder.name.setText(user.getNick());
+							break;
+						}
+					}
+				}
+			} else {
+				holder.name.setText(new EMContact(username).getNick());
+			}
 		}
 
 		if (conversation.getUnreadMsgCount() > 0) {

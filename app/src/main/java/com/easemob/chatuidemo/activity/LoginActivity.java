@@ -36,17 +36,11 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
-import com.ufo.judicature.Entity.LoginEntity;
-import com.ufo.judicature.Entity.ServiceResult;
-import com.ufo.judicature.Entity.UserInfoEntity;
 import com.ufo.judicature.JudiApplication;
-import com.ufo.judicature.Net.Api;
-import com.ufo.judicature.Net.NetUtils;
 import com.ufo.judicature.R;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
-import com.ufo.judicature.Utils.Config;
 
 /**
  * 登陆页面
@@ -165,6 +159,7 @@ public class LoginActivity extends BaseActivity {
 							Toast.makeText(getApplicationContext(), R.string.login_failure_failed, Toast.LENGTH_LONG).show();
 						}
 					});
+					finish();
 					return;
 				}
 				// 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
@@ -177,24 +172,7 @@ public class LoginActivity extends BaseActivity {
 					pd.dismiss();
 				}
 
-				runOnUiThread(new Runnable() {
-					public void run() {
-						Api.signin(LoginActivity.this, currentUsername, currentPassword, new NetUtils.NetCallBack<ServiceResult>() {
-							@Override
-							public void success(ServiceResult rspData) {
-								Toast.makeText(getApplicationContext(), ((LoginEntity) rspData).getMsg(), Toast.LENGTH_SHORT).show();
-
-								Config.setUserId(((LoginEntity) rspData).getData().getId());
-								finish();
-							}
-
-							@Override
-							public void failed(String msg) {
-								Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-							}
-						}, LoginEntity.class);
-					}
-				});
+				finish();
 			}
 
 			@Override
@@ -209,7 +187,7 @@ public class LoginActivity extends BaseActivity {
 				runOnUiThread(new Runnable() {
 					public void run() {
 						pd.dismiss();
-						Toast.makeText(getApplicationContext(), getString(R.string.Login_failed) + message,
+						Toast.makeText(getApplicationContext(), getString(R.string.Login_failed),
 								Toast.LENGTH_SHORT).show();
 					}
 				});

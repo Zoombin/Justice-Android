@@ -57,7 +57,7 @@ public class FeedbackActivity extends BaseActivity {
 
 	private void feedback() {
 		String content  = et_feedback.getText().toString().trim();
-		Api.advice(self, content, Config.getUserId() , new NetUtils.NetCallBack<ServiceResult>() {
+		Api.advice(self, content, JudiApplication.getInstance().getUserName() , new NetUtils.NetCallBack<ServiceResult>() {
 			@Override
 			public void success(ServiceResult rspData) {
 				FeedbackEntity entity = (FeedbackEntity) rspData;

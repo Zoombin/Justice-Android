@@ -58,6 +58,9 @@ public class PropagandaVideoFragment extends BaseFragment implements OnRefreshLi
         Api.getVideos(mActivity, page, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
+                if (page == 0) {
+                    adapter.clearData();
+                }
                 lv_video.hideHeaderView();
                 lv_video.hideFooterView();
                 VideosEntity entity = (VideosEntity) rspData;
@@ -78,7 +81,6 @@ public class PropagandaVideoFragment extends BaseFragment implements OnRefreshLi
     @Override
     public void onDownPullRefresh() {
         page = 0;
-        adapter.clearData();
         getData();
     }
 

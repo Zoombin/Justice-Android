@@ -49,7 +49,7 @@ public class ExamFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         if (DemoHXSDKHelper.getInstance().isLogined()) {
-            Api.getUserInfo(mActivity, Config.getUserId(), new NetUtils.NetCallBack<ServiceResult>() {
+            Api.getUserInfo(mActivity, JudiApplication.getInstance().getUserName(), new NetUtils.NetCallBack<ServiceResult>() {
                 @Override
                 public void success(ServiceResult rspData) {
                     UserInfoEntity entity = (UserInfoEntity) rspData;

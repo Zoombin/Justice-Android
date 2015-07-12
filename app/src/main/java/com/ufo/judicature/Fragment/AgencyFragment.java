@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ufo.judicature.Activity.AgencyDetailActivity;
 import com.ufo.judicature.Activity.MapActivity;
 import com.ufo.judicature.Base.BaseFragment;
 import com.ufo.judicature.Entity.AgencyEntity;
@@ -136,8 +137,8 @@ public class AgencyFragment extends BaseFragment {
             itemHolder.ly_service_sub.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mActivity, MapActivity.class);
-                    intent.putExtra(MapActivity.EXTRA_SERVICE, serviceEntity);
+                    Intent intent = new Intent(mActivity, AgencyDetailActivity.class);
+                    intent.putExtra(AgencyDetailActivity.EXTRA_AGENCY, serviceEntity);
                     startActivity(intent);
                 }
             });

@@ -155,6 +155,10 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
         Api.getNews(mActivity, page, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
+                if (page == 0) {
+                    viewpageradapter.clearData();
+                    adapter.clearData();
+                }
                 lv_news.hideHeaderView();
                 lv_news.hideFooterView();
                 NewsEntity entity = (NewsEntity) rspData;
@@ -175,8 +179,6 @@ public class PropagandaNewsFragment extends BaseFragment implements OnRefreshLis
     @Override
     public void onDownPullRefresh() {
         page = 0;
-        viewpageradapter.clearData();
-        adapter.clearData();
         initData();
     }
 

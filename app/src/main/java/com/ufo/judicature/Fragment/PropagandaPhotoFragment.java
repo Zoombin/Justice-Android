@@ -53,7 +53,6 @@ public class PropagandaPhotoFragment extends BaseFragment implements OnRefreshLi
     @Override
     public void onDownPullRefresh() {
         page = 0;
-        adapter.clearData();
         getData();
     }
 
@@ -70,6 +69,9 @@ public class PropagandaPhotoFragment extends BaseFragment implements OnRefreshLi
         Api.getPhotos(mActivity, page, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
+                if (page == 0) {
+                    adapter.clearData();
+                }
                 lv_photo.hideHeaderView();
                 lv_photo.hideFooterView();
                 PhotosEntity entity = (PhotosEntity) rspData;

@@ -64,37 +64,37 @@ public class Api {
     /**
      * 我的预约
      * @param context
-     * @param userid
+     * @param account
      * @param netCallBack
      * @param rspCls
      */
-    public static void getMyReservation(Context context, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=getMyReservation&user_id=" + userid, "正在获得预约信息！", netCallBack, rspCls);
+    public static void getMyReservation(Context context, String account, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getMyReservation&account=" + account, "正在获得预约信息！", netCallBack, rspCls);
     }
 
     /**
      * 我要预约
      * @param context
-     * @param userid
+     * @param account
      * @param name
      * @param identityNumber
      * @param phone
      * @param netCallBack
      * @param rspCls
      */
-    public static void getDoReservation(Context context, String userid, String name, String identityNumber, String phone, String date, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=reserve&user_id=" + userid + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date, "正在提交！", netCallBack, rspCls);
+    public static void getDoReservation(Context context, String account, String name, String identityNumber, String phone, String date, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=reserve&account=" + account + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date, "正在提交！", netCallBack, rspCls);
     }
 
     /**
      * 用户信息
      * @param context
-     * @param userid
+     * @param account
      * @param netCallBack
      * @param rspCls
      */
-    public static void getUserInfo(Context context, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=getUserInfo&user_id=" + userid, "正在获取积分信息，请稍等...", netCallBack, rspCls);
+    public static void getUserInfo(Context context, String account, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=getUserInfo&account=" + account, "正在获取积分信息，请稍等...", netCallBack, rspCls);
     }
 
     /**
@@ -120,14 +120,14 @@ public class Api {
     /**
      * 考试得分
      * @param context
-     * @param userid
+     * @param account
      * @param score
      * @param examination_id
      * @param netCallBack
      * @param rspCls
      */
-    public static void addMyScore(Context context, String userid, String score, String examination_id, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=addMyScore" + "&user_id=" + userid + "&score=" + score + "&examination_id=" + examination_id, "正在提交。。。", netCallBack, rspCls);
+    public static void addMyScore(Context context, String account, String score, String examination_id, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=addMyScore" + "&account=" + account + "&score=" + score + "&examination_id=" + examination_id, "正在提交。。。", netCallBack, rspCls);
     }
 
     /**
@@ -141,30 +141,14 @@ public class Api {
     }
 
     /**
-     * 注册
+     * 意见反馈
      * @param context
+     * @param content
      * @param account
-     * @param password
      * @param netCallBack
      * @param rspCls
      */
-    public static void signup(Context context, String account, String password, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=signup" + "&account=" + account + "&password=" + password, null, netCallBack, rspCls);
-    }
-
-    /**
-     * 登录
-     * @param context
-     * @param account
-     * @param password
-     * @param netCallBack
-     * @param rspCls
-     */
-    public static void signin(Context context, String account, String password, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=signin" + "&account=" + account + "&password=" + password, null, netCallBack, rspCls);
-    }
-
-    public static void advice(Context context, String content, String userid, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=advice" + "&content=" + URLEncoder.encode(content) + "&user_id=" + userid, null, netCallBack, rspCls);
+    public static void advice(Context context, String content, String account, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=advice" + "&content=" + URLEncoder.encode(content) + "&account=" + account, null, netCallBack, rspCls);
     }
 }

@@ -90,18 +90,7 @@ public class RegisterActivity extends BaseActivity {
 									pd.dismiss();
 								// 保存用户名
 								JudiApplication.getInstance().setUserName(username);
-								Api.signup(RegisterActivity.this, username, pwd, new NetUtils.NetCallBack<ServiceResult>() {
-									@Override
-									public void success(ServiceResult rspData) {
-										Toast.makeText(getApplicationContext(), ((UserInfoEntity)rspData).getMsg(), Toast.LENGTH_SHORT).show();
-									}
-
-									@Override
-									public void failed(String msg) {
-										Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-									}
-								}, UserInfoEntity.class);
-//								Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
+								Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
 								finish();
 							}
 						});

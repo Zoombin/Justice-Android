@@ -47,18 +47,20 @@ public class MyNotarizationActivity extends BaseActivity {
     }
 
     private void initData() {
-        Api.getMyReservation(self, Config.getUserId(), new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getMyReservation(self, JudiApplication.getInstance().getUserName(), new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 MyNortarizationEntity myNortarizationEntity = (MyNortarizationEntity) rspData;
                 List<MyNortarizationEntity.NortarizationInfo> nortarizationInfos = myNortarizationEntity.getData();
                 if (nortarizationInfos != null) {
                     String info = "";
-                    for (MyNortarizationEntity.NortarizationInfo nortarizationInfo : nortarizationInfos) {
-                        info += "姓名：" + nortarizationInfo.getName() + "\n" +
+                    for (int i=0; i<nortarizationInfos.size(); i++) {
+                        MyNortarizationEntity.NortarizationInfo nortarizationInfo = nortarizationInfos.get(i);
+                        info += "预约" + (i + 1) + ":\n" +
+                                "姓名：" + nortarizationInfo.getName() + "\n" +
                                 "身份证：" + nortarizationInfo.getIdentity_number() + "\n" +
                                 "手机号码：" + nortarizationInfo.getPhone() + "\n" +
-                                "预约时间：" + nortarizationInfo.getReserve_date()+ "\n";
+                                "预约时间：" + nortarizationInfo.getReserve_date() + "\n\n";
                     }
                     tv_mynotarization.setText(info);
                 }

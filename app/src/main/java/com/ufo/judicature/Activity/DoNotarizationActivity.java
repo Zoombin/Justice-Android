@@ -137,7 +137,7 @@ public class DoNotarizationActivity extends BaseActivity {
             return;
         }
 
-        Api.getDoReservation(self, Config.getUserId(), name, idcard, phone, date, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getDoReservation(self, JudiApplication.getInstance().getUserName(), name, idcard, phone, date, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 DoNortarizationEntity doNortarizationEntity = (DoNortarizationEntity) rspData;

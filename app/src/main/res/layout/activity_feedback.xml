@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dip"
         android:minLines="8"
+        android:maxEms="400"
         android:textSize="18sp"
         android:textColor="@color/app_text_black"
         android:hint="请填写您的宝贵意见" />

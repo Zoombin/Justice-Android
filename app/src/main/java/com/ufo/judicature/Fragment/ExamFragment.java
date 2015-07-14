@@ -35,7 +35,6 @@ public class ExamFragment extends BaseFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_exam, container, false);
         createView(v);
-        initData();
         return v;
     }
 
@@ -45,6 +44,12 @@ public class ExamFragment extends BaseFragment implements View.OnClickListener {
         btn_integration = (Button) v.findViewById(R.id.btn_integration);
         btn_exam.setOnClickListener(this);
         btn_integration.setOnClickListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initData() {

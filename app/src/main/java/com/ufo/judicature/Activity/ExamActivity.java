@@ -356,13 +356,10 @@ public class ExamActivity extends BaseActivity {
                 holder.rb_yes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String aw = "";
+                        answers[position] = "1";
                         if (questionInfo.getYes_or_no().equals("1")) {
-                            aw = "1";
                             scores[position] = onesource;
-                            answers[position] = "1";
                         } else {
-                            aw = "0";
                             scores[position] = 0;
                         }
                     }
@@ -370,13 +367,10 @@ public class ExamActivity extends BaseActivity {
                 holder.rb_no.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String aw = "";
+                        answers[position] = "2";
                         if (questionInfo.getYes_or_no().equals("0")) {
-                            aw = "1";
                             scores[position] = onesource;
-                            answers[position] = "2";
                         } else {
-                            aw = "0";
                             scores[position] = 0;
                         }
                     }

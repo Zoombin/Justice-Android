@@ -94,7 +94,7 @@ public class Api {
      * @param rspCls
      */
     public static void getUserInfo(Context context, String account, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=getUserInfo&account=" + account, "正在获取积分信息，请稍等...", netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=getUserInfo&account=" + account, null, netCallBack, rspCls);
     }
 
     /**
@@ -149,6 +149,6 @@ public class Api {
      * @param rspCls
      */
     public static void advice(Context context, String content, String account, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=advice" + "&content=" + URLEncoder.encode(content) + "&account=" + account, null, netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=advice" + "&content=" + content.replace("", "%20") + "&account=" + account, null, netCallBack, rspCls);
     }
 }

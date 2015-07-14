@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -57,6 +58,10 @@ public class FeedbackActivity extends BaseActivity {
 
 	private void feedback() {
 		String content  = et_feedback.getText().toString().trim();
+		if (TextUtils.isEmpty(content)) {
+			com.ufo.judicature.Widget.Toast.show(self, "请填写您的宝贵意见！");
+			return;
+		}
 		Api.advice(self, content, JudiApplication.getInstance().getUserName() , new NetUtils.NetCallBack<ServiceResult>() {
 			@Override
 			public void success(ServiceResult rspData) {

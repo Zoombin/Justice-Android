@@ -52,7 +52,7 @@ public class PhotoDetailActivity extends BaseActivity {
 		Collections.addAll(items, urls);
 		UrlPagerAdapter pagerAdapter = new UrlPagerAdapter(this, items);
 		viewpager_photos = (GalleryViewPager) findViewById(R.id.viewpager_photos);
-		viewpager_photos.setOffscreenPageLimit(100);
+//		viewpager_photos.setOffscreenPageLimit(100);
 		viewpager_photos.setAdapter(pagerAdapter);
 
 		viewpager_photos.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

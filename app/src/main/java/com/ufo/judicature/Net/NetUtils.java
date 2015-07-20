@@ -31,7 +31,7 @@ public class NetUtils {
 		public void failed(String msg);
 	}
 
-	public static final String BASE_URL = "http://112.124.98.9/dushuhu-web/index.php";
+	public static final String BASE_URL = "http://www.ufocapital.com:8000/index.php";
 
 	private static RequestQueue mQueue = Volley.newRequestQueue(JudiApplication.getContext());
 
@@ -94,7 +94,7 @@ public class NetUtils {
 			}
 		});
 
-		request.setRetryPolicy(new DefaultRetryPolicy(4 * 1000, 1, 1.0f));
+		request.setRetryPolicy(new DefaultRetryPolicy(10 * 1000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		mQueue.add(request);
 		mQueue.start();
 	}
@@ -158,7 +158,7 @@ public class NetUtils {
 				return params;
 			}
 		};
-		request.setRetryPolicy(new DefaultRetryPolicy(4 * 1000, 1, 1.0f));
+		request.setRetryPolicy(new DefaultRetryPolicy(10 * 1000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		mQueue.add(request);
 		mQueue.start();
 	}

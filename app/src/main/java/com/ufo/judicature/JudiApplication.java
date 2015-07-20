@@ -71,7 +71,7 @@ public class JudiApplication extends Application {
     }
 
     private void initImageLoader(Context context) {
-        new DisplayImageOptions.Builder()
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_empty)
                 .showImageForEmptyUri(R.drawable.ic_empty)
                 .showImageOnFail(R.drawable.ic_error)
@@ -82,6 +82,7 @@ public class JudiApplication extends Application {
                 .build();
 
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
+        config.defaultDisplayImageOptions(defaultOptions);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
         config.denyCacheImageMultipleSizesInMemory();
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());

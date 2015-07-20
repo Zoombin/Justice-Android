@@ -22,10 +22,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ufo.judicature.R;
 import com.ufo.judicature.Widget.gallery.InputStreamWrapper.InputStreamProgressListener;
 
@@ -62,7 +66,7 @@ public class UrlTouchImageView extends RelativeLayout {
         this.addView(mImageView);
         mImageView.setVisibility(GONE);
 
-        mProgressBar = new ProgressBar(mContext, null, android.R.attr.progressBarStyleHorizontal);
+        mProgressBar = new ProgressBar(mContext, null);
         params = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.CENTER_VERTICAL);
         params.setMargins(30, 0, 30, 0);
@@ -74,7 +78,33 @@ public class UrlTouchImageView extends RelativeLayout {
 
     public void setUrl(String imageUrl)
     {
-        new ImageLoadTask().execute(imageUrl);
+//        new ImageLoadTask().execute(imageUrl);
+        ImageLoader.getInstance().displayImage(imageUrl, mImageView, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String s, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String s, View view, FailReason failReason) {
+                mImageView.setScaleType(ScaleType.CENTER);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.no_photo);
+                mImageView.setImageBitmap(bitmap);
+                mImageView.setVisibility(VISIBLE);
+                mProgressBar.setVisibility(GONE);
+            }
+
+            @Override
+            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                mImageView.setVisibility(VISIBLE);
+                mProgressBar.setVisibility(GONE);
+            }
+
+            @Override
+            public void onLoadingCancelled(String s, View view) {
+
+            }
+        });
     }
     
     public void setScaleType(ScaleType scaleType) {

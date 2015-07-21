@@ -8,8 +8,7 @@ import java.util.List;
  */
 public class MyNortarizationEntity extends ServiceResult implements Serializable {
 
-//    {"data":[{"id":"25","user_id":"1","name":"123","identity_number":"","phone":"123123","reserve_date":"2015-07-09","created_date":"2015-07-08 06:06:48"},
-//        {"id":"23","user_id":"1","name":"123","identity_number":"","phone":"123","reserve_date":"2015-07-10","created_date":"2015-07-07 17:40:21"},{"id":"22","user_id":"1","name":"123123","identity_number":"","phone":"123213","reserve_date":"2015-07-08","created_date":"2015-07-07 17:40:10"},{"id":"21","user_id":"1","name":"123","identity_number":"","phone":"123","reserve_date":"2015-07-10","created_date":"2015-07-07 17:38:18"},{"id":"20","user_id":"1","name":"abc","identity_number":"","phone":"12345678901","reserve_date":"2015-07-14","created_date":"2015-07-07 16:07:18"},{"id":"19","user_id":"1","name":"????????????","identity_number":"","phone":"145255853639584486331789624752","reserve_date":"2015-07-09","created_date":"2015-07-07 15:59:49"},{"id":"18","user_id":"1","name":"abc","identity_number":"","phone":"15555563699888","reserve_date":"2015-07-14","created_date":"2015-07-07 15:55:56"},{"id":"17","user_id":"1","name":"sgrghjihgdevhrghyjhfhhfg","identity_number":"","phone":"1?MTK???????????dll","reserve_date":"2015-07-12","created_date":"2015-07-07 15:55:22"},{"id":"16","user_id":"1","name":"bcd","identity_number":"","phone":"123","reserve_date":"2015-07-08","created_date":"2015-07-07 15:52:07"},{"id":"15","user_id":"1","name":"abc","identity_number":"","phone":"123","reserve_date":"2015-07-08","created_date":"2015-07-07 15:51:53"},{"id":"14","user_id":"1","name":"bcd","identity_number":"","phone":"123456789","reserve_date":"2015-07-13","created_date":"2015-07-07 15:49:19"},{"id":"13","user_id":"1","name":"abc","identity_number":"","phone":"12345678901","reserve_date":"2015-07-14","created_date":"2015-07-07 15:48:46"},{"id":"12","user_id":"1","name":"abc","identity_number":"","phone":"12346678901","reserve_date":"2015-07-08","created_date":"2015-07-07 15:47:28"},{"id":"11","user_id":"1","name":"bjjggghh","identity_number":"","phone":"135445668666","reserve_date":"2015-07-11","created_date":"2015-07-07 15:15:47"},{"id":"10","user_id":"1","name":"zhang","identity_number":"320504198","phone":"188888","reserve_date":"2015-07-02","created_date":"2015-07-06 09:46:05"},{"id":"9","user_id":"1","name":"zhang","identity_number":"320504198","phone":"188888","reserve_date":"2015-07-02","created_date":"2015-07-02 00:00:00"},{"id":"8","user_id":"1","name":"zhang","identity_number":"320504198","phone":"188888","reserve_date":"2015-07-02","created_date":"2015-07-02 00:00:00"},{"id":"7","user_id":"1","name":"zhang","identity_number":"320504198","phone":"188888","reserve_date":"2015-07-02","created_date":"2015-07-02 00:00:00"},{"id":"6","user_id":"1","name":"zhang","identity_number":"320504198","phone":"188888","reserve_date":"2015-07-02","created_date":"2015-07-02 00:00:00"},{"id":"5","user_id":"1","name":"zhang","identity_number":"320504198","phone":"188888","reserve_date":"2015-07-09","created_date":"2015-07-02 00:00:00"}],"error":false,"msg":""}private NortarizationInfo data;
+//    {"data":[{"id":"88","account":"daiye","name":"\u6234\u7ef4","identity_number":"320520198305040913","phone":"18662670711","type":"??????\/??????","reserve_date":"2015-07-24","created_date":"2015-07-22 07:03:53"},{"id":"74","account":"daiye","name":"\u6234\u70e8","identity_number":"320520198305040913","phone":"18662670711","type":null,"reserve_date":"2015-07-15","created_date":"2015-07-13 09:51:57"}],"error":false,"msg":""}
 
     private List<NortarizationInfo> data;
 
@@ -29,6 +28,7 @@ public class MyNortarizationEntity extends ServiceResult implements Serializable
         private String phone;
         private String reserve_date;
         private String created_date;
+        private String type;
 
         public String getId() {
             return id;
@@ -84,6 +84,14 @@ public class MyNortarizationEntity extends ServiceResult implements Serializable
 
         public void setCreated_date(String created_date) {
             this.created_date = created_date;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
     }
 }

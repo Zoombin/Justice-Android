@@ -31,55 +31,85 @@
             android:id="@+id/tv_commit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="20dip"
             android:text="提交"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </RelativeLayout>
 
-
-    <Button
-        android:id="@+id/btn_date"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="15dip"
-        android:layout_marginTop="20dip"
-        android:text="请选择预约时间"
-        android:textSize="15sp"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/tv_nortarization_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="15dip"
-        android:layout_marginTop="20dip"
-        android:hint="姓名"
-        android:textColor="@color/app_text_black"
-        android:textSize="15sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/tv_nortarization_idcard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="15dip"
-        android:layout_marginTop="20dip"
-        android:hint="身份证号"
-        android:textColor="@color/app_text_black"
-        android:textSize="15sp" />
+            <Button
+                android:id="@+id/btn_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:text="请选择预约类型"
+                android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/tv_nortarization_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="15dip"
-        android:layout_marginTop="20dip"
-        android:hint="手机号码"
-        android:textColor="@color/app_text_black"
-        android:textSize="15sp" />
+            <Button
+                android:id="@+id/btn_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:text="请选择预约时间"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/tv_nortarization_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:hint="姓名"
+                android:textColor="@color/app_text_black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/tv_nortarization_idcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:hint="身份证号"
+                android:textColor="@color/app_text_black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/tv_nortarization_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:hint="手机号码"
+                android:textColor="@color/app_text_black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="20dip"
+                android:hint="公证预约须知：请至少提前一天预约，每天预约限额为5人，仅限工作日办理。"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -76,19 +76,20 @@ public class LawyerListFragment extends BaseFragment {
                 for (LawyersEntity.LawyerGroup lawyerGroup : lawyerGroups) {
                     group_list.add(lawyerGroup.getName());
                     ArrayList<User> users = new ArrayList<User>();
-                    for (LawyersEntity.Lawyer lawyer : lawyerGroup.getLawyers()) {
-                        User user = new User();
-                        user.setUsername(lawyer.getAccount());
-                        user.setNick(lawyer.getNickname());
-                        users.add(user);
+                    if (lawyerGroup.getLawyers() != null) {
+                        for (LawyersEntity.Lawyer lawyer : lawyerGroup.getLawyers()) {
+                            User user = new User();
+                            user.setUsername(lawyer.getAccount());
+                            user.setNick(lawyer.getNickname());
+                            users.add(user);
+                        }
+
                     }
                     item_list.add(users);
                 }
 
                 adapter = new MyExpandableListViewAdapter(mActivity);
                 listView.setAdapter(adapter);
-
-
             }
 
             @Override

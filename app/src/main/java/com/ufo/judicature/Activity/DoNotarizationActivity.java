@@ -34,19 +34,20 @@ public class DoNotarizationActivity extends BaseActivity {
 
     private ImageView image_back;
     private TextView tv_commit;
+    private Button btn_type;
     private Button btn_date;
     private EditText tv_nortarization_name;
     private EditText tv_nortarization_idcard;
     private EditText tv_nortarization_phone;
     String[] dates;
-
+    String[] datatype = {"委托公证", "遗嘱公证", "继承公证", "赠与合同", "保全证据公证", "现场监督公证", "房屋买卖合同/租赁合同公证", "抵押合同/质押合同公证",
+            "提存", "涉外" } ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donotarization);
 
         initView();
-        initData();
     }
 
     private void initView() {
@@ -54,12 +55,51 @@ public class DoNotarizationActivity extends BaseActivity {
         btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Api.getReserveDate(self, new NetUtils.NetCallBack<ServiceResult>() {
+                    @Override
+                    public void success(ServiceResult rspData) {
+                        final ArrayList<ReserveDateEntity.DateEntity> data = ((ReserveDateEntity) rspData).getData();
+                        dates = new String[data.size()];
+                        for (int i=0; i<data.size(); i++) {
+                            ReserveDateEntity.DateEntity dateEntity = data.get(i);
+                            dates[i] = dateEntity.getDate() + "(剩" + dateEntity.getLeft() + "人)";
+                        }
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(self);
+                        builder.setTitle("请选择预约时间");
+                        builder.setItems(dates, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (data.get(which).getLeft().equals("0")) {
+                                    Toast.show(self, "预约人数已满，请选择其他时间！");
+                                    return;
+                                }
+                                btn_date.setText(data.get(which).getDate());
+                            }
+                        });
+                        builder.show();
+                    }
+
+                    @Override
+                    public void failed(String msg) {
+                        Toast.show(self, msg);
+                        finish();
+                    }
+                }, ReserveDateEntity.class);
+
+            }
+        });
+        btn_type = (Button) findViewById(R.id.btn_type);
+        btn_type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(self);
-                builder.setTitle("请选择预约时间");
-                builder.setItems(dates, new DialogInterface.OnClickListener() {
+                builder.setTitle("请选择预约类型");
+                builder.setItems(datatype, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        btn_date.setText(dates[which]);
+                        btn_type.setText(datatype[which]);
                     }
                 });
                 builder.show();
@@ -84,24 +124,12 @@ public class DoNotarizationActivity extends BaseActivity {
         tv_nortarization_phone = (EditText) findViewById(R.id.tv_nortarization_phone);
     }
 
-    private void initData() {
-        Api.getReserveDate(self, new NetUtils.NetCallBack<ServiceResult>() {
-            @Override
-            public void success(ServiceResult rspData) {
-                ArrayList<String> data = ((ReserveDateEntity) rspData).getData();
-                String[] strArr = new String[data.size()];
-                dates = data.toArray(strArr);
-            }
-
-            @Override
-            public void failed(String msg) {
-                Toast.show(self, msg);
-                finish();
-            }
-        }, ReserveDateEntity.class);
-    }
-
     private void donotarization() {
+        String type = btn_type.getText().toString().trim();
+        if (type.equals("请选择预约类型")) {
+            Toast.show(self, "请选择预约类型！");
+            return;
+        }
         String date = btn_date.getText().toString().trim();
         if (date.equals("请选择预约时间")) {
             Toast.show(self, "请选择预约时间！");
@@ -137,7 +165,7 @@ public class DoNotarizationActivity extends BaseActivity {
             return;
         }
 
-        Api.getDoReservation(self, JudiApplication.getInstance().getUserName(), name, idcard, phone, date, new NetUtils.NetCallBack<ServiceResult>() {
+        Api.getDoReservation(self, JudiApplication.getInstance().getUserName(), name, idcard, phone, date, type, new NetUtils.NetCallBack<ServiceResult>() {
             @Override
             public void success(ServiceResult rspData) {
                 DoNortarizationEntity doNortarizationEntity = (DoNortarizationEntity) rspData;

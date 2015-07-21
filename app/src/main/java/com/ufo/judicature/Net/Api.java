@@ -82,8 +82,8 @@ public class Api {
      * @param netCallBack
      * @param rspCls
      */
-    public static void getDoReservation(Context context, String account, String name, String identityNumber, String phone, String date, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=reserve&account=" + account + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date, "正在提交！", netCallBack, rspCls);
+    public static void getDoReservation(Context context, String account, String name, String identityNumber, String phone, String date, String type, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
+        NetUtils.getValue(context, "?action=reserve&account=" + account + "&name=" + URLEncoder.encode(name) + "&phone=" + phone + "&identity_number=" + identityNumber + "&reserve_date=" + date + "&type=" + URLEncoder.encode(type), "正在提交！", netCallBack, rspCls);
     }
 
     /**
@@ -149,6 +149,6 @@ public class Api {
      * @param rspCls
      */
     public static void advice(Context context, String content, String account, final NetUtils.NetCallBack<ServiceResult> netCallBack, final Class<?> rspCls) {
-        NetUtils.getValue(context, "?action=advice" + "&content=" + content.replace("", "%20") + "&account=" + account, null, netCallBack, rspCls);
+        NetUtils.getValue(context, "?action=advice" + "&content=" + content.replace(" ", "%20") + "&account=" + account, null, netCallBack, rspCls);
     }
 }

@@ -31,8 +31,8 @@ public class NetUtils {
 		public void failed(String msg);
 	}
 
-//	public static final String BASE_URL = "http://www.ufocapital.com:8000/index.php";
-	public static final String BASE_URL = "http://112.124.98.9/justice/index.php";
+	public static final String BASE_URL = "http://www.ufocapital.com:8000/index.php";
+//	public static final String BASE_URL = "http://112.124.98.9/justice/index.php";
 
 	private static RequestQueue mQueue = Volley.newRequestQueue(JudiApplication.getContext());
 

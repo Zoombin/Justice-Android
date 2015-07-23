@@ -341,6 +341,12 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-    </application>
 
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55b0f23ee0f55ae89f003581" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="android" />
+    </application>
 </manifest>

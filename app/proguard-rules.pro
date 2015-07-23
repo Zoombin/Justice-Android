@@ -38,3 +38,6 @@
 -keep class org.bitlet.** {*;}
 -keep class org.slf4j.** {*;}
 -keep class ch.imvs.** {*;}
+
+-keep class com.umeng.analytics.** {*;}
+-keep class u.aly.** {*;}

@@ -36,12 +36,12 @@ public class AgencyDetailActivity extends BaseActivity implements View.OnClickLi
         ((TextView) findViewById(R.id.tv_map)).setOnClickListener(this);
         ((TextView) findViewById(R.id.tv_title)).setText(serviceEntity.getName());
         iv_service = (ImageView) findViewById(R.id.iv_service);
-        ImageLoader.getInstance().displayImage(serviceEntity.getImage(), iv_service);
+        if (serviceEntity.getImage() != null) {
+            ImageLoader.getInstance().displayImage(serviceEntity.getImage(), iv_service);
+        }
         tv_service_info = (TextView) findViewById(R.id.tv_service_info);
         tv_service_info.setText("地址：" + serviceEntity.getAddress() + "\n" +
-                        "联系电话：" + serviceEntity.getPhone() + "\n" +
-                        "成立时间：" + serviceEntity.getCreated_date() + "\n"
-        );
+                        "联系电话：" + serviceEntity.getPhone());
 
     }
 

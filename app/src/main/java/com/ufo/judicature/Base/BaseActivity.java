@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ufo.judicature.Utils.ActivityManager;
+import com.umeng.analytics.MobclickAgent;
 
 public abstract class BaseActivity extends FragmentActivity {
 	protected ActivityManager activityManager;
@@ -24,8 +25,18 @@ public abstract class BaseActivity extends FragmentActivity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		width = dm.widthPixels;
 		height = dm.heightPixels;
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

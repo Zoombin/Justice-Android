@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dip"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/app_text_black" />
         </LinearLayout>
     </ScrollView>

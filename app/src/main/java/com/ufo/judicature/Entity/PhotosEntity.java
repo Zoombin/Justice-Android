@@ -75,7 +75,7 @@ public class PhotosEntity extends ServiceResult implements Serializable {
         }
     }
 
-    public class Photo implements Serializable {
+    public static class Photo implements Serializable {
         private String id;
         private String image;
         private String gallery_id;

@@ -2,6 +2,7 @@ package com.ufo.judicature.Fragment;
 
 import android.content.Context;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,8 @@ import java.util.ArrayList;
  */
 public class LawyerFragment extends BaseFragment {
 
+    private TextView tv_layer;
+    private TextView tv_history;
     private ViewPager pager_lawyer;
     protected FragmentAdapter adapter;
     private LawyerListFragment lawyerListFragment;
@@ -47,7 +50,24 @@ public class LawyerFragment extends BaseFragment {
 
         View v = inflater.inflate(R.layout.activity_lawyer, container, false);
 
+
         pager_lawyer = (ViewPager) v.findViewById(R.id.pager_lawyer);
+
+        tv_layer = (TextView) v.findViewById(R.id.tv_layer);
+        tv_layer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pager_lawyer.setCurrentItem(0);
+            }
+        });
+
+        tv_history = (TextView) v.findViewById(R.id.tv_history);
+        tv_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pager_lawyer.setCurrentItem(1);
+            }
+        });
 
         FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
         ArrayList<Fragment> fragmentlist = new ArrayList();

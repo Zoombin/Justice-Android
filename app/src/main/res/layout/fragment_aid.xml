@@ -107,10 +107,60 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;申请提交法律援助机构后，法律援助将按照以下条件进行审查并决定能否获得法律援助：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、有合理的请求及事实依据；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、请求事项属于法律援助范围；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、因经济困难无能力承担法律服务费用。"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;申请提交法律援助机构后，法律援助将按照以下条件进行审查并决定能否获得法律援助：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1、有合理的请求及事实依据；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2、请求事项属于法律援助范围；\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;3、因经济困难无能力承担法律服务费用。\n"
                 android:textColor="@color/app_text_gray"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="常熟新市民(外来人员)问答"
+                android:textColor="@color/app_text_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1、问：什么是法律援助？\n答：简单来说，就是当你自身权益受到侵害需要打官司，且你又因为经济困难请不起律师，而由法律援助机构为你提供一名免费律师帮助你打官司。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2、问：新市民能否申请法律援助？\n答：可以。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3、问：新市民遇到哪些情况可以申请法律援助呢？\n答：如果你在工作、生活中，发生工伤事故、交通事故、意外事故而使身体遭受严重损害的，或者工作后被拖欠工资等情况，可提交发生事故的相关证据材料或被拖欠工资的相关材料以及你经济困难的证明，向常熟市法律援助中心申请。\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;另外，如果你或你的家人因涉嫌刑事犯罪，在被公安机关、检察机关抓捕后，你或你的家人因为经济困难请不起辩护律师的，也可提交相关材料向法律援助中心申请。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4、问：新市民申请法律援助需要提供的经济困难证明需向哪个部门申请出具？\n答：申请人住所地或经常居住地街道办事处、乡（镇）人民政府出具。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5、问：法律援助到哪里去申请？\n答：向案件管辖地法院的同级法律援助中心申请。也就是说，如果你的纠纷发生在常熟，可向常熟市法律援助中心申请。同时，为了及时便民，如果你在常熟市区的各乡镇，也可向设立在当地镇政府司法所的法律援助工作站提出申请。\n"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6、问：法律援助热线电话是多少？如何拨打？\n答：法律援助热线电话为“12348”。如果需要法律咨询可以在工作日的上午9：00--11：30，下午13：30--17：00用固定电话或手机拨打“12348”进行咨询，我们将有专职律师进行解答。"
+                android:textColor="@color/app_text_gray"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

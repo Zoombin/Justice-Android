@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  *
  */
 
-public abstract class ServiceResult {
+public class ServiceResult {
 	@SerializedName("error")
 	public boolean error;
 

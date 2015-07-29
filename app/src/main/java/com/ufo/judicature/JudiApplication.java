@@ -84,6 +84,8 @@ public class JudiApplication extends Application {
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
         config.defaultDisplayImageOptions(defaultOptions);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
+        // 并发
+        config.threadPoolSize(100);
         config.denyCacheImageMultipleSizesInMemory();
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
         config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
@@ -92,7 +94,6 @@ public class JudiApplication extends Application {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
     }
-
 
     /**
      * 获取内存中好友user list

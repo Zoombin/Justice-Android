@@ -97,7 +97,6 @@ public class NetUtils {
 
 		request.setRetryPolicy(new DefaultRetryPolicy(10 * 1000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		mQueue.add(request);
-		mQueue.start();
 	}
 
 	// POST
@@ -161,7 +160,6 @@ public class NetUtils {
 		};
 		request.setRetryPolicy(new DefaultRetryPolicy(10 * 1000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		mQueue.add(request);
-		mQueue.start();
 	}
 
 	public static boolean getErrorCode(String str) {

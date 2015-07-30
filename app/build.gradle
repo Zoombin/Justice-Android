@@ -5,7 +5,7 @@ android {
         relese {
             keyAlias 'ufo'
             keyPassword 'ufo123123'
-            storeFile file('C:/Users/daiye/AndroidStudioProjects/Justice-Android/key.jks')
+            storeFile file('D:/Users/Administrator/AndroidStudioProjects/Justice-Android/key.jks')
             storePassword 'ufo123123'
         }
     }
@@ -34,15 +34,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile files('libs/universal-image-loader-1.9.4.jar')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/baidumapapi_v3_5_0.jar')
     compile files('libs/locSDK_5.2.jar')
     compile files('libs/easemobchat_2.2.1.jar')
     compile files('libs/picasso-2.4.0.jar')
     compile files('libs/umeng-analytics-v5.5.3.jar')
-    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.code.gson:gson:2.3.1'
-    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    compile 'com.android.support:support-v4:22.2.1'
+    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
 }

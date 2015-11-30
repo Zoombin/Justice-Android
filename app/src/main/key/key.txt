@@ -1,5 +1,0 @@
-key store password:ufo123123
-key alias:ufo
-key password:ufo123123
-SHA1:95:6F:FB:4A:B4:9E:AD:00:AE:17:D6:FB:A6:B7:22:F9:A2:52:03:C1
-com.ufo.judicature

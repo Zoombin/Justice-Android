@@ -5,7 +5,7 @@ android {
         relese {
             keyAlias 'ufo'
             keyPassword 'ufo123123'
-            storeFile file('keystore/key.jks')
+            storeFile file('D:/Users/Administrator/AndroidStudioProjects/Justice-Android/key.jks')
             storePassword 'ufo123123'
         }
     }
@@ -21,13 +21,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFile 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relese
         }
         debug {
-            signingConfig signingConfigs.config
-            minifyEnabled false
+            signingConfig signingConfigs.relese
         }
     }
     productFlavors {
